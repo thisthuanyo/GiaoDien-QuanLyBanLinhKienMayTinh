@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="wpfLKMT.qlNhaSanXuat"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:wpfLKMT"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Height="auto" Width="700">
+    <Grid>
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Width="309">
+                    <GroupBox Header="Tìm kiếm" Margin="0 0 0 10" materialDesign:ColorZoneAssist.Mode="Dark">
+                        <TextBox Name="txtSearchNSX" KeyUp="TxtSearchNSX_KeyUp" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã nhà sản xuất" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                    </GroupBox>
+                    <GroupBox Header="Thông tin nhà sản xuất" materialDesign:ColorZoneAssist.Mode="Dark">
+                        <StackPanel Orientation="Vertical">
+                            <Grid Margin="0 30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="56*"/>
+                                    <ColumnDefinition Width="51*"/>
+                                    <ColumnDefinition Width="16*"/>
+                                    <ColumnDefinition Width="131*"/>
+                                    <ColumnDefinition Width="30*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Mã nhà sản xuất"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Tên nhà sản xuất" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                                <TextBlock Grid.Column="0" Grid.Row="4" Text="Trạng thái" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+
+
+                                <TextBox Grid.Column="3" Grid.Row="0" Name="txtMaNSX"/>
+                                <TextBox Grid.Column="3" Grid.Row="2" Name="txtTenNSX"/>
+                                <CheckBox Content="Active?" Grid.Column="3" Grid.Row="4" Name="checkActive"/>
+
+                            </Grid>
+                            <StackPanel Orientation="Horizontal" Margin="0 30" Width="250">
+                                <Button  Width="100" Height="30" Content="Thêm" Name="btnThemNSX" Background="Gray" BorderThickness="0" Click="BtnThemNSX_Click"/>
+                                <Button  Width="100" Height="30" Content="Sửa" Margin="50  0" Name="btnSuaNSX" Background="Gray" BorderThickness="0" Click="BtnSuaNSX_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+                <DataGrid Name="dgNhaSanXuat" AutoGenerateColumns="False" SelectedValuePath="MaNhaSX"  Margin="10 0" Width="381" IsReadOnly="True" SelectionChanged="DgNhaSanXuat_SelectionChanged"  >
+                    <DataGrid.Effect>
+                        <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
+                    </DataGrid.Effect>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã Nhà sản xuất" Binding="{Binding MaNhaSX}" />
+                        <DataGridTextColumn Header="Tên nhà sản xuất" Binding="{Binding TenNhaSX}" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Xóa" Name="btnXoa" Click="BtnXoa_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>

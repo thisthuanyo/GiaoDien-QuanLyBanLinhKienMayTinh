@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="wpfLKMT.qlLoaiLK"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:wpfLKMT"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Height="450" Width="700">
+    <Grid>
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical" Width="299">
+                    <GroupBox Header="Tìm kiếm" Margin="0 0 0 10" materialDesign:ColorZoneAssist.Mode="Dark">
+                        <TextBox Name="txtSearch" materialDesign:TextFieldAssist.HasClearButton="True" KeyUp="TextBox_KeyUp" materialDesign:HintAssist.Hint="Mã linh kiện" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                    </GroupBox>
+                    <GroupBox Header="Thông tin loại linh kiện" materialDesign:ColorZoneAssist.Mode="Dark" Height="341">
+                        <StackPanel Orientation="Vertical">
+                            <Grid Margin="0 30">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="56*"/>
+                                    <ColumnDefinition Width="51*"/>
+                                    <ColumnDefinition Width="16*"/>
+                                    <ColumnDefinition Width="131*"/>
+                                    <ColumnDefinition Width="30*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Column="0" Grid.Row="0" Text="Mã loại linh kiện"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                                <TextBlock Grid.Column="0" Grid.Row="2" Text="Tên loại linh kiện" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                                <TextBlock Grid.Column="0" Grid.Row="4" Text="Trạng thái" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+
+
+                                <TextBox Grid.Column="3" Grid.Row="0" Name="txtMaLoai"/>
+                                <TextBox Grid.Column="3" Grid.Row="2" Name="txtTenLoai"/>
+                                <CheckBox Content="Active?" Grid.Column="3" Grid.Row="4" Name="checkIsActive"/>
+
+                            </Grid>
+                            <StackPanel Orientation="Horizontal" Margin="0 30" Width="250">
+                                <Button  Width="100" Height="30" Content="Thêm" Name="btnThemLLK" Background="Gray" BorderThickness="0" Click="BtnThemLLK_Click" />
+                                <Button  Width="100" Height="30" Content="Sửa" Name="btnSuaLLK" Margin="50  0" Background="Gray" BorderThickness="0" Click="BtnSuaLLK_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+                <DataGrid Name="dgDanhSachLLK" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" Margin="20,0,20,10" Width="381" SelectionChanged="DgDanhSachLLK_SelectionChanged">
+                    <DataGrid.Effect>
+                        <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
+                    </DataGrid.Effect>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Mã loại linh kiện" Binding="{Binding MaLoai}"/>
+                        <DataGridTextColumn Header="Tên loại linh kiện" Binding="{Binding TenLoai}"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Xóa" Name="btnXoa" Click="BtnXoa_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>

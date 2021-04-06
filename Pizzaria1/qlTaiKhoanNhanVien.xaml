@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="wpfLKMT.qlTaiKhoanNhanVien"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:wpfLKMT"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Height="auto" Width="500">
+    <StackPanel Orientation="Vertical">
+        <GroupBox Header="Thông tin nhân viên"  materialDesign:ColorZoneAssist.Mode="Dark">
+            <StackPanel Orientation="Vertical">
+                <Grid Height="268">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="12*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="12*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Mã nhân viên" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Tên nhân viên" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
+                    <TextBlock Text="Địa chỉ" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+                    <TextBlock Text="Số điện thoại" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
+                    <TextBox Name="txtMaNV" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
+                    <TextBox Name="txtTenNV" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
+                    <TextBox Name="txtDiaChi" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBox Name="txtSDT" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center"/>
+                    <TextBlock Text="Username" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
+                    <TextBox Name="txtUserName" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center"/>
+                    <TextBox Name="txtPassword" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" Margin="0,12,20,12" Visibility="Hidden" Text="{Binding Path=Password, ElementName=passwordBox}"/>
+                </Grid>
+                <Separator/>
+                <StackPanel Width="300" HorizontalAlignment="Left" Margin="0 5">
+                    <CheckBox x:Name="MaterialDesignOutlinedPasswordFieldPasswordBoxEnabledComboBox" Content="Reset password" />
+                    <PasswordBox Margin="0 10" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedPasswordFieldPasswordBoxEnabledComboBox}" materialDesign:HintAssist.Hint="Password" />
+                    <PasswordBox Margin="0 3" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedPasswordFieldPasswordBoxEnabledComboBox}" materialDesign:HintAssist.Hint="Confirm Password" />
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+        <StackPanel Height="50" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Cập nhật" x:Name="btnCapNhat" Background="Gray" BorderThickness="0" Width="115" Margin="30,9"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
