@@ -37,9 +37,7 @@ E:\wpfLKMT\wpfLKMT\Pizzaria1\obj\Debug\qlNhanVien.g.cs
 E:\wpfLKMT\wpfLKMT\Pizzaria1\obj\Debug\qlNhanVien.baml
 E:\wpfLKMT\wpfLKMT\Pizzaria1\obj\Debug\qlHoaDon.g.cs
 E:\wpfLKMT\wpfLKMT\Pizzaria1\obj\Debug\qlHoaDon.baml
-E:\wpfLKMT\wpfLKMT\Pizzaria1\obj\Debug\qlKhachHangNhanVien.g.cs
 E:\wpfLKMT\wpfLKMT\Pizzaria1\obj\Debug\qlLinhKienNhanVien.g.cs
-E:\wpfLKMT\wpfLKMT\Pizzaria1\obj\Debug\qlKhachHangNhanVien.baml
 E:\wpfLKMT\wpfLKMT\Pizzaria1\obj\Debug\qlLinhKienNhanVien.baml
 E:\wpfLKMT\wpfLKMT\Pizzaria1\obj\Debug\qlKhachHang.g.cs
 E:\wpfLKMT\wpfLKMT\Pizzaria1\obj\Debug\qlPhieuXuat.g.cs

@@ -53,7 +53,7 @@ namespace wpfLKMT
                     break;
                 case 1:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new qlKhachHangNhanVien());
+                    GridPrincipal.Children.Add(new qlKhachHang());
                     break;
                 case 2:
                     GridPrincipal.Children.Clear();

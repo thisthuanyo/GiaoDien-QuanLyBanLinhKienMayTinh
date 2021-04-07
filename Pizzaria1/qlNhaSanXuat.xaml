@@ -53,8 +53,8 @@
                         <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
                     </DataGrid.Effect>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mã Nhà sản xuất" Binding="{Binding MaNhaSX}" />
-                        <DataGridTextColumn Header="Tên nhà sản xuất" Binding="{Binding TenNhaSX}" />
+                        <DataGridTextColumn Header="Mã Nhà sản xuất" Binding="{Binding MaNhaSX}" Width="100" />
+                        <DataGridTextColumn Header="Tên nhà sản xuất" Binding="{Binding TenNhaSX}"  Width="170"/>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

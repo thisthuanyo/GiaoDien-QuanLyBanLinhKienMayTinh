@@ -114,9 +114,6 @@
     <Compile Include="qlKhachHang.xaml.cs">
       <DependentUpon>qlKhachHang.xaml</DependentUpon>
     </Compile>
-    <Compile Include="qlKhachHangNhanVien.xaml.cs">
-      <DependentUpon>qlKhachHangNhanVien.xaml</DependentUpon>
-    </Compile>
     <Compile Include="qlLinhKien.xaml.cs">
       <DependentUpon>qlLinhKien.xaml</DependentUpon>
     </Compile>
@@ -176,10 +173,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="qlKhachHang.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="qlKhachHangNhanVien.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
