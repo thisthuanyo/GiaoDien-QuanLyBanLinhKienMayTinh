@@ -102,6 +102,7 @@
     <Compile Include="Models\CXuLyLoaiLK.cs" />
     <Compile Include="Models\CXuLyNhanVien.cs" />
     <Compile Include="Models\CXuLyNhaSX.cs" />
+    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="NhanVienWindow.xaml.cs">
       <DependentUpon>NhanVienWindow.xaml</DependentUpon>
     </Compile>

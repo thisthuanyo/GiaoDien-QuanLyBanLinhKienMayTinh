@@ -21,9 +21,30 @@ namespace wpfLKMT.Models
                 var nv = kq.Result.Content.ReadAsAsync<CNhanVien>();
                 nv.Wait();
                 if (nv.Result.Pass == password)
+                {
                     return nv.Result;
+                }
                 else return null;
-            } catch(Exception)
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        public static List<CChucVu> getDSChucVu()
+        {
+            try
+            {
+                string url = @"http://localhost:64275/api/chucvu";
+                var kq = hc.GetAsync(url);
+                kq.Wait();
+                if (kq.Result.IsSuccessStatusCode == false)
+                    return null;
+                var listCV = kq.Result.Content.ReadAsAsync<List<CChucVu>>();
+                listCV.Wait();
+                return listCV.Result;
+            }
+            catch (Exception)
             {
                 return null;
             }
@@ -85,6 +106,22 @@ namespace wpfLKMT.Models
             catch (Exception)
             {
                 return false;
+            }
+        }
+        public static CChucVu findChucVu(string macv)
+        {
+            try
+            {
+                string url = @"http://localhost:64275/api/chucvu/" + macv;
+                var kq = hc.GetAsync(url);
+                kq.Wait();
+                if (kq.Result.IsSuccessStatusCode == false) return null;
+                var a = kq.Result.Content.ReadAsAsync<CChucVu>();
+                return a.Result;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
     }
