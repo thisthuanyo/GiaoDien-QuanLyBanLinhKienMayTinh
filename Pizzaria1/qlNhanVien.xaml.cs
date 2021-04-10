@@ -115,7 +115,7 @@ namespace wpfLKMT
         }
         private void BtnThemNV_Click(object sender, RoutedEventArgs e)
         {
-            if (txtMaNV.Text == "" || txtPassword.Text == "" || txtDiaChi.Text == "" || passwordBox.Password == "" || txtPassword.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "" || txtUserName.Text == "" || txtNamSinh.Text == "" || cboChucVu.Text == "")
+            if (txtMaNV.Text == "" || txtDiaChi.Text == "" || passwordBox.Password == "" || txtPassword.Text == "" || txtSDT.Text == "" || txtTenNV.Text == "" || txtUserName.Text == "" || txtNamSinh.Text == "" || cboChucVu.Text == "")
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin cho nhân viên!", "Thông báo");
             }
@@ -138,7 +138,7 @@ namespace wpfLKMT
                 nv.UserName = txtUserName.Text;
                 nv.DiaChi = txtDiaChi.Text;
                 nv.SoDT = txtSDT.Text;
-                if(checkExistUserName(nv.UserName))
+                if (checkExistUserName(nv.UserName))
                 {
                     MessageBox.Show("Tên username này đã tồn tại!!", "Thông báo");
                 }
@@ -155,7 +155,7 @@ namespace wpfLKMT
                         MessageBox.Show("Thêm nhân viên thất bại");
                 }
             }
-              
+
         }
 
         private void BtnSuaNV_Click(object sender, RoutedEventArgs e)
@@ -184,7 +184,7 @@ namespace wpfLKMT
                 nv.UserName = txtUserName.Text;
                 nv.DiaChi = txtDiaChi.Text;
                 nv.SoDT = txtSDT.Text;
-                if (checkExistUserName(nv.UserName))
+                if (checkExistUserName(nv.UserName) && nvSelected.UserName != txtUserName.Text)
                 {
                     MessageBox.Show("Tên username này đã tồn tại!!", "Thông báo");
                 }
@@ -200,7 +200,7 @@ namespace wpfLKMT
                     else
                         MessageBox.Show("Sửa nhân viên thất bại");
                 }
-            }          
+            }
         }
 
         private void DgDSNhanVien_SelectionChanged(object sender, SelectionChangedEventArgs e)
