@@ -71,7 +71,6 @@ namespace wpfLKMT
                 else
                     MessageBox.Show("Thêm khách hàng thất bại");
             }
-
         }
 
         private void BtnSuaKH_Click(object sender, RoutedEventArgs e)
