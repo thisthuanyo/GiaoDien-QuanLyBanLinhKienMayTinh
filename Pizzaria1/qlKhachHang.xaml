@@ -39,41 +39,38 @@
                             <TextBox Name="txtSDT" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center"/>
                             <TextBox Name="txtDiaChi" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="2" Margin="0">
-                                <RadioButton Content="Nam" IsChecked="True"/>
-                                <RadioButton Content="Nữ"/>
+                                <RadioButton Content="Nam" IsChecked="True" Name="radNam"/>
+                                <RadioButton Content="Nữ" Name="radNu"/>
                             </StackPanel>
-                            <TextBox Name="txtTuoi" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center"/>
-                            <CheckBox Name="checkTrangThai" Content="Active?" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center"/>
-                            <DatePicker Name="dpNamSinh" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center"/>
+                            <CheckBox Name="checkTrangThai" IsChecked="True" Content="Active?" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center"/>
+                            <TextBox Name="txtNamSinh" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center"/>
                         </Grid>
                     </GroupBox>
                     <StackPanel Height="50" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="Thêm" Name="btnThemKH" Background="Gray" BorderThickness="0" Width="88" Margin="0,9"/>
-                        <Button Content="Thêm" x:Name="btnSuaKH" Background="Gray" BorderThickness="0" Width="88" Margin="30,9"/>
+                        <Button Click="BtnThemKH_Click" Content="Thêm" Name="btnThemKH" Background="Gray" BorderThickness="0" Width="88" Margin="0,9"/>
+                        <Button Click="BtnSuaKH_Click" Content="Sửa" x:Name="btnSuaKH" Background="Gray" BorderThickness="0" Width="88" Margin="30,9"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Width="330" Margin="20 0 0 0">
                     <GroupBox Header="Tìm kiếm" materialDesign:ColorZoneAssist.Mode="Dark">
-                        <TextBox materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã khách hàng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                        <TextBox Name="txtSearch" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã khách hàng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" TextChanged="TextBox_TextChanged"/>
                     </GroupBox>
-                    <DataGrid Name="dgDanhSachLK" AutoGenerateColumns="False" Height="310">
+                    <DataGrid x:Name="dgDSKhachHang" IsReadOnly="True" AutoGenerateColumns="False" Height="310" SelectionChanged="DgDSKhachHang_SelectionChanged" >
                         <DataGrid.Effect>
                             <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
                         </DataGrid.Effect>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding mahang}" Width="105"/>
-                            <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding tenhang}" Width="120"/>
-                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding mahang}" Width="80"/>
+                            <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MaKH}" Width="105"/>
+                            <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding TenKh}" Width="120"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Xóa" Name="btnXoa"/>
+                                        <Button Content="Xóa" Name="btnXoa" Click="BtnXoa_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-
                 </StackPanel>
             </StackPanel>
         </materialDesign:TransitioningContent>
