@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using wpfLKMT.Models;
 
 namespace wpfLKMT
 {
@@ -33,12 +34,14 @@ namespace wpfLKMT
                 if(a.ChucVu.Equals("AD"))
                 {
                     MainWindow f = new MainWindow(a);
+                    UserLogin nv = new UserLogin(a);
                     this.Hide();
                     f.Show();
                 }
                 else if(a.ChucVu.Equals("NV"))
                 {
                     NhanVienWindow f = new NhanVienWindow(a);
+                    UserLogin nv = new UserLogin(a);
                     this.Hide();
                     f.Show();
                 }

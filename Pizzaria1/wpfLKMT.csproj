@@ -102,6 +102,7 @@
     <Compile Include="Models\CXuLyLoaiLK.cs" />
     <Compile Include="Models\CXuLyNhanVien.cs" />
     <Compile Include="Models\CXuLyNhaSX.cs" />
+    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="NhanVienWindow.xaml.cs">
       <DependentUpon>NhanVienWindow.xaml</DependentUpon>
     </Compile>
@@ -113,9 +114,6 @@
     </Compile>
     <Compile Include="qlKhachHang.xaml.cs">
       <DependentUpon>qlKhachHang.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="qlKhachHangNhanVien.xaml.cs">
-      <DependentUpon>qlKhachHangNhanVien.xaml</DependentUpon>
     </Compile>
     <Compile Include="qlLinhKien.xaml.cs">
       <DependentUpon>qlLinhKien.xaml</DependentUpon>
@@ -176,10 +174,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="qlKhachHang.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="qlKhachHangNhanVien.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

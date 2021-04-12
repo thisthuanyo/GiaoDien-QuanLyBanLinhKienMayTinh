@@ -7,14 +7,15 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Height="auto" Width="700">
+    
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
             <StackPanel Orientation="Horizontal">
-                <StackPanel Width="350" Orientation="Vertical">
+                <StackPanel Width="370" Orientation="Vertical">
                     <GroupBox Header="Thông tin nhân viên"  materialDesign:ColorZoneAssist.Mode="Dark">
                         <Grid Height="350">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="12*"/>
                                 <ColumnDefinition Width="12*"/>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="10*"/>
@@ -26,30 +27,26 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Mã nhân viên" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
                             <TextBlock Text="Tên nhân viên" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
                             <TextBlock Text="Địa chỉ" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
                             <TextBlock Text="Số điện thoại" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
-                            <TextBlock Text="Ngày vào làm" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
-                            <TextBlock Text="Chức vụ" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center"/>
+                            <TextBlock Text="Chức vụ" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
                             <TextBox Name="txtMaNV" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"/>
                             <TextBox Name="txtTenNV" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
                             <TextBox Name="txtDiaChi" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" TextWrapping="Wrap"/>
                             <TextBox Name="txtSDT" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
-                            <DatePicker Name="dpNgayVaoLam" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
-                            <ComboBox Name="cboChucVu" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center"/>
+                            <ComboBox DisplayMemberPath="TenCV" Name="cboChucVu" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
 
                             <TextBlock Text="Username" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
                             <TextBlock Text="Password" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
                             <TextBlock Text="Giới tính" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
-                            <TextBlock Text="Lương" Grid.Column="3" Grid.Row="5" VerticalAlignment="Center"/>
                             <TextBlock Text="Trạng thái" Grid.Column="3" Grid.Row="4" VerticalAlignment="Center"/>
                             <TextBlock Text="Năm sinh" Grid.Column="3" Grid.Row="3" VerticalAlignment="Center"/>
                             <TextBox Name="txtUserName" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center"/>
                             <StackPanel Grid.Column="4" Grid.Row="1" Orientation="Horizontal">
-                                <PasswordBox x:Name="passwordBox" Width="67" Height="25"/>
+                                <PasswordBox x:Name="passwordBox" Width="68" Height="25" Margin="0,22"/>
 
                                 <Button x:Name="btnShowPassword" Width="20" Height="20" Background="Gray" BorderBrush="{x:Null}" Padding="0" Click="BtnShowPassword_Click">
                                     <materialDesign:PackIcon Kind="Eye" Foreground="Black"/>
@@ -57,46 +54,42 @@
                             </StackPanel>
                             <TextBox Name="txtPassword" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" Margin="0,12,20,12" Visibility="Hidden" Text="{Binding Path=Password, ElementName=passwordBox}"/>
                             <StackPanel Orientation="Horizontal" Grid.Column="4" Grid.Row="2" Margin="0">
-                                <RadioButton Content="Nam" IsChecked="True"/>
-                                <RadioButton Content="Nữ"/>
+                                <RadioButton Name="radNam" Content="Nam" IsChecked="True"/>
+                                <RadioButton Name="radNu" Content="Nữ"/>
                             </StackPanel>
-                            <DatePicker Name="dpNamSinh" Grid.Column="4" Grid.Row="3" VerticalAlignment="Center"/>
+                            <TextBox Name="txtNamSinh" Grid.Column="4" Grid.Row="3" VerticalAlignment="Center"/>
                             <CheckBox Name="checkTrangThai" Content="Active?" Grid.Column="4" Grid.Row="4" VerticalAlignment="Center"/>
-                            <TextBox Name="txtLuong" Grid.Column="4" Grid.Row="5" VerticalAlignment="Center"/>
 
 
                         </Grid>
                     </GroupBox>
                     <StackPanel Height="50" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Content="Thêm" Background="Gray" BorderThickness="0" Width="88" Margin="0,9"/>
-                        <Button Content="Sửa" Margin="30,9,0,9" Width="88" Background="Gray" BorderThickness="0"/>
+                        <Button Content="Thêm" Name="btnThemNV" Click="BtnThemNV_Click" Background="Gray" BorderThickness="0" Width="88" Margin="0,9"/>
+                        <Button Content="Sửa" Name="btnSuaNV" Click="BtnSuaNV_Click" Margin="30,9,0,9" Width="88" Background="Gray" BorderThickness="0"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Width="330" Margin="20 0 0 0">
+                <StackPanel Orientation="Vertical" Width="320" Margin="10 0 0 0">
                     <GroupBox Header="Tìm kiếm" materialDesign:ColorZoneAssist.Mode="Dark">
-                        <TextBox materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã nhân viên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                        <TextBox materialDesign:TextFieldAssist.HasClearButton="True" TextChanged="TxtSearchNV_TextChanged" Name="txtSearchNV" materialDesign:HintAssist.Hint="Mã nhân viên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                     </GroupBox>
-                    <DataGrid Name="dgDanhSachLK" AutoGenerateColumns="False" Height="310">
+                    <DataGrid Margin="0 10" x:Name="dgDSNhanVien" IsReadOnly="True" AutoGenerateColumns="False" Height="310" SelectionChanged="DgDSNhanVien_SelectionChanged">
                         <DataGrid.Effect>
                             <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
                         </DataGrid.Effect>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã nhân viên" Binding="{Binding mahang}" Width="105"/>
-                            <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding tenhang}" Width="120"/>
-                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding mahang}" Width="80"/>
+                            <DataGridTextColumn Header="Mã số" Binding="{Binding MaNV}" Width="90" FontSize="14"/>
+                            <DataGridTextColumn Header="Tên nhân viên" Binding="{Binding TenNV}" Width="150" FontSize="14"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Xóa" Name="btnXoa"/>
+                                        <Button Content="Xóa" x:Name="btnXoaNV" Click="BtnXoaNV_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-
                 </StackPanel>
             </StackPanel>
-
         </materialDesign:TransitioningContent>
     </Grid>
 </UserControl>
