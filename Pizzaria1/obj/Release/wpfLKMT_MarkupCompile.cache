@@ -4,15 +4,15 @@
 winexe
 C#
 .cs
-E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\obj\Debug\
+E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\obj\Release\
 wpfLKMT
 none
 false
-DEBUG;TRACE
+TRACE
 E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\App.xaml
 17105980194
 
-341075749110
+33107822049
 17405960127
 LoginForm.xaml;MainWindow.xaml;NhanVienWindow.xaml;qlHoaDon.xaml;qlHoaDonNhanVien.xaml;qlKhachHang.xaml;qlKhachHangNhanVien.xaml;qlLinhKien.xaml;qlLinhKienNhanVien.xaml;qlLoaiLK.xaml;qlNhanVien.xaml;qlNhaSanXuat.xaml;qlPhieuXuat.xaml;qlPhieuXuatAdmin.xaml;qlTaiKhoanNhanVien.xaml;UserControlEscolha.xaml;UserControlInicio.xaml;
 
