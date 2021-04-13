@@ -41,10 +41,14 @@ namespace wpfLKMT
         }
         private void hienthi()
         {
-            List<CPhieuXuat> dsPhieuXuat = CXuLyPhieuXuat.getDSPhieuXuat();      
+            List<CPhieuXuat> dsPhieuXuat = CXuLyPhieuXuat.getDSPhieuXuat();
             dgDSPhieuXuat.ItemsSource = dsPhieuXuat;
+            List<CKhachHang> dsKhachHang = CXuLyKhachHang.getDSKhachHang();
+            cboMaKH.ItemsSource = dsKhachHang;
+            CNhanVien nvLogin = UserLogin.getLoginUser();
+            txtMaNV.Text = nvLogin.MaNV;
         }
-
+        
         private void BtnChon_Click(object sender, RoutedEventArgs e)
         {
             int n;
@@ -110,6 +114,123 @@ namespace wpfLKMT
                     }
                 }
             }
+        }
+        private void BtnXoa_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgChitiet.SelectedItem == null) return;
+            string malk = dgChitiet.SelectedValue.ToString();
+            foreach (CChiTietPhieuXuat t in pxTemp.ChiTietPhieuXuats)
+            {
+                if (t.MaLK == malk)
+                {
+                    pxTemp.ChiTietPhieuXuats.Remove(t);
+                    break;
+                }
+            }
+            dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxTemp);
+            txtThanhtien.Text = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp).ToString();
+        }
+
+        private void BtnTaoPX_Click(object sender, RoutedEventArgs e)
+        {
+            if (dpNgayXuat.SelectedDate == null)
+            {
+                MessageBox.Show("Chọn ngày lập phiếu xuất!!");
+                dpNgayXuat.Focus();
+            }
+            else if (cboMaKH.Text == "")
+            {
+                MessageBox.Show("Nhập mã khách hàng!!");
+                cboMaKH.Focus();
+            }
+            else if (pxTemp.ChiTietPhieuXuats.Count == 0)
+            {
+                MessageBox.Show("Chưa chọn linh kiện nào để lập phiếu xuất!!");
+            }
+            else
+            {
+                CPhieuXuat px = new CPhieuXuat();
+                px.NgayXuat = dpNgayXuat.SelectedDate;
+                px.MaKH = cboMaKH.Text;
+                px.MaNV = txtMaNV.Text;
+                px.TongTien = double.Parse(txtThanhtien.Text);
+                px.status = true;
+                px.ChiTietPhieuXuats = pxTemp.ChiTietPhieuXuats.Select(x => new CChiTietPhieuXuat
+                {
+                    MaPX = px.MaPX,
+                    MaLK = x.MaLK,
+                    DonGia = x.DonGia,
+                    SoLuong = x.SoLuong
+                }).ToList();
+                bool ok = CXuLyPhieuXuat.themPhieuXuat(px);
+                if (ok == false) MessageBox.Show("Không thêm được phiếu xuất!!");
+                else
+                {
+                    MessageBox.Show("Thêm phiếu xuất thành công!!");
+                    hienthi();
+                    pxTemp.ChiTietPhieuXuats.Clear();
+                    dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxTemp);
+                    txtThanhtien.Text = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp).ToString();
+                }
+            }
+        }
+        private void BtnHuy_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult Result = MessageBox.Show("Bạn có chắc chắn muốn hủy phiếu xuất này không?", "Xác nhận hủy phiếu xuất", MessageBoxButton.YesNo);
+            if (Result == MessageBoxResult.Yes)
+            {
+                CPhieuXuat px = dgDSPhieuXuat.SelectedItem as CPhieuXuat;
+                if(px.status == false)
+                {
+                    MessageBox.Show("Phiếu xuất này đã bị hủy!!", "Thông báo");
+                }
+                else
+                {
+                    px.status = false;
+                    bool kq = CXuLyPhieuXuat.huyPhieuXuat(px);
+                    if (kq == true)
+                    {
+                        MessageBox.Show("Hủy phiếu xuất thành công!!");
+                    }
+                    else MessageBox.Show("Hủy phiếu xuất thất bại!");
+                }
+            }
+        }
+        private void DgDSPhieuXuat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CPhieuXuat a = dgDSPhieuXuat.SelectedItem as CPhieuXuat;
+            if(a!=null)
+            {
+                CPhieuXuat pxa = CXuLyPhieuXuat.getPhieuXuat(a.MaPX);
+                txtSoPX.Text = a.MaPX.ToString();
+                txtMaNV.Text = a.MaNV;
+                cboMaKH.Text = a.MaKH;
+                dpNgayXuat.SelectedDate = a.NgayXuat;
+                dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxa);
+                txtThanhtien.Text = a.TongTien.ToString();
+            }
+        }
+
+        private void DgChitiet_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<CPhieuXuat> dsPhieuXuat = CXuLyPhieuXuat.getDSPhieuXuat();
+            List<CPhieuXuat> filter = new List<CPhieuXuat>();
+            foreach (CPhieuXuat px in dsPhieuXuat)
+            {
+                px.MaPX.ToString().ToUpper();
+                if (px.MaPX.ToString().Contains(txtSearch.Text.ToUpper()))
+                {
+                    filter.Add(px);
+                }
+            }
+            dgDSPhieuXuat.ItemsSource = filter.ToList();
+            if (txtSearch.Text == null)
+                dgDSPhieuXuat.ItemsSource = CXuLyNhanVien.getDanhSachNhanVien();
         }
     }
 }

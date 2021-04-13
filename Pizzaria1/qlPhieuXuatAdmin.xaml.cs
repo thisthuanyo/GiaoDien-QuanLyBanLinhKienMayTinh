@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfLKMT.Models;
 
 namespace wpfLKMT
 {
@@ -23,6 +24,68 @@ namespace wpfLKMT
         public qlPhieuXuatAdmin()
         {
             InitializeComponent();
+            hienthi();
+        }
+        private void hienthi()
+        {
+            List<CPhieuXuat> dsPhieuXuat = CXuLyPhieuXuat.getDSPhieuXuat();
+            dgDSPhieuXuat.ItemsSource = dsPhieuXuat;
+        }
+
+        private void BtnHuy_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult Result = MessageBox.Show("Bạn có chắc chắn muốn hủy phiếu xuất này không?", "Xác nhận hủy phiếu xuất", MessageBoxButton.YesNo);
+            if (Result == MessageBoxResult.Yes)
+            {
+                CPhieuXuat px = dgDSPhieuXuat.SelectedItem as CPhieuXuat;
+                if (px.status == false)
+                {
+                    MessageBox.Show("Phiếu xuất này đã bị hủy!!", "Thông báo");
+                }
+                else
+                {
+                    px.status = false;
+                    bool kq = CXuLyPhieuXuat.huyPhieuXuat(px);
+                    if (kq == true)
+                    {
+                        MessageBox.Show("Hủy phiếu xuất thành công!!");
+                    }
+                    else MessageBox.Show("Hủy phiếu xuất thất bại!");
+                }
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<CPhieuXuat> dsPhieuXuat = CXuLyPhieuXuat.getDSPhieuXuat();
+            List<CPhieuXuat> filter = new List<CPhieuXuat>();
+            foreach (CPhieuXuat px in dsPhieuXuat)
+            {
+                px.MaPX.ToString().ToUpper();
+                if (px.MaPX.ToString().Contains(txtSearch.Text.ToUpper()))
+                {
+                    filter.Add(px);
+                }
+            }
+            dgDSPhieuXuat.ItemsSource = filter.ToList();
+            if (txtSearch.Text == null)
+                dgDSPhieuXuat.ItemsSource = CXuLyNhanVien.getDanhSachNhanVien();
+        }
+
+        private void DgDSPhieuXuat_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CPhieuXuat a = dgDSPhieuXuat.SelectedItem as CPhieuXuat;
+            if (a != null)
+            {
+                CPhieuXuat pxa = CXuLyPhieuXuat.getPhieuXuat(a.MaPX);
+                txtSoPX.Text = a.MaPX.ToString();
+                
+                txtMaNV.Text = a.MaNV;
+                txtMaKH.Text = a.MaKH;
+                dpNgayXuat.SelectedDate = a.NgayXuat;
+                dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxa);
+                txtThanhtien.Text = a.TongTien.ToString();
+            }
         }
     }
 }

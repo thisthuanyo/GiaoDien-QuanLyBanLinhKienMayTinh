@@ -25,35 +25,40 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
-                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Mã phiếu xuất" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Ngày xuất" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Mã khách hàng" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Mã nhân viên" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="0" Grid.Row="4" Text="Trạng thái" VerticalAlignment="Center"/>
 
-                                <TextBox Grid.Column="2" Grid.Row="0" Name="txtSoPX" VerticalAlignment="Center"/>
+                                <TextBox Grid.Column="2" Grid.Row="0" Name="txtSoPX" VerticalAlignment="Center" IsReadOnly="True"/>
                                 <DatePicker Grid.Column="2" Grid.Row="1" Name="dpNgayXuat" VerticalAlignment="Center"/>
-                                <TextBox Grid.Column="2" Grid.Row="2" Name="txtMaKH" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="2" Grid.Row="2" Name="cboMaKH" VerticalAlignment="Center" DisplayMemberPath="MaKH"/>
                                 <TextBox Grid.Column="2" Grid.Row="3" IsReadOnly="True" Name="txtMaNV" VerticalAlignment="Center"/>
-                                <CheckBox Grid.Column="2" Grid.Row="4" Name="checkHuyPX" Content="Hủy phiếu xuất?" VerticalAlignment="Center"/>
 
                             </Grid>
                         </GroupBox>
-                        <Button Content="Tạo phiếu xuất" Name="btnTaoPX" Background="Gray" BorderThickness="0" Margin="0 5" Height="30" Width="136"></Button>
+                        <Button Content="Tạo phiếu xuất" Name="btnTaoPX" Click="BtnTaoPX_Click" Background="Gray" BorderThickness="0" Margin="0 5" Height="30" Width="136"></Button>
                     </StackPanel>
                     <StackPanel Margin="10,0" Width="445">
                         <GroupBox Header="Tìm kiếm" materialDesign:ColorZoneAssist.Mode="Dark">
-                            <TextBox materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã phiếu xuất" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                            <TextBox materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã phiếu xuất" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Name="txtSearch" TextChanged="TextBox_TextChanged"/>
                         </GroupBox>
                         <GroupBox Header="Danh sách phiếu xuất" materialDesign:ColorZoneAssist.Mode="Dark" Margin="0,5" Height="200">
-                            <DataGrid x:Name="dgDSPhieuXuat" AutoGenerateColumns="False" Margin="0,-6,0,-7" Width="430">
+                            <DataGrid x:Name="dgDSPhieuXuat" AutoGenerateColumns="False" Margin="0,-6,0,-7" Width="430" IsReadOnly="True" SelectionChanged="DgDSPhieuXuat_SelectionChanged">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Mã phiếu xuất"/>
-                                    <DataGridTextColumn Header="Mã khách hàng"/>
-                                    <DataGridTextColumn Header="Ngày xuất"/>
+                                    <DataGridTextColumn Header="Mã phiếu xuất" Binding="{Binding MaPX}"/>
+                                    <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MaKH}"/>
+                                    <DataGridTextColumn Header="Ngày xuất"  Binding="{Binding NgayXuat}" Width="100"/>
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="Hủy" Name="btnHuy" Click="BtnHuy_Click"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
                                 </DataGrid.Columns>
+                                
                             </DataGrid>
                         </GroupBox>
                     </StackPanel>
@@ -83,18 +88,17 @@
                                 <TextBox Grid.Row="1" Grid.Column="2" IsReadOnly="True" Margin="10 0" Text="{Binding ElementName=cmbMahang, Path=SelectedItem.GiaBan}" VerticalAlignment="Center"/>
                                 <TextBox Grid.Row="1" Grid.Column="3" Name="txtSoluong" Margin="10 0" VerticalAlignment="Center"/>
                             </Grid>
-                            <DataGrid Name="dgChitiet" AutoGenerateColumns="False" Margin="0 10" Height="161"  SelectedValuePath="MaLk">
+                            <DataGrid Name="dgChitiet" AutoGenerateColumns="False" Margin="0 10" Height="161"  SelectedValuePath="MaLK" SelectionChanged="DgChitiet_SelectionChanged" >
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Mã linh kiện" Binding="{Binding MaLK}"/>
                                     <DataGridTextColumn Header="Tên linh kiện" Binding="{Binding TenLK}"/>
-                                    <DataGridTextColumn Header="Loại linh kiện" Binding="{Binding MaLoai}"/>
                                     <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia}"/>
                                     <DataGridTextColumn Header="Số lượng" Binding="{Binding SoLuong}"/>
                                     <DataGridTextColumn Header="Thành tiền" Binding="{Binding thanhtien}"/>
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button Content="Xóa" Name="btnXoa"/>
+                                                <Button Content="Xóa" Name="btnXoa" Click="BtnXoa_Click"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -111,7 +115,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="3" Text="Tổng tiền tiền" />
+                                <TextBlock Grid.Row="0" Grid.Column="3" Text="Tổng tiền" />
                                 <TextBox Grid.Row="0" Grid.Column="4" Name="txtThanhtien" IsReadOnly="True"/>
                             </Grid>
                         </StackPanel>

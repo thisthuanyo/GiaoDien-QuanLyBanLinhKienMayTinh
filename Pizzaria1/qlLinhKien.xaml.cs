@@ -22,6 +22,7 @@ namespace wpfLKMT
     {
         private List<CLinhKien> temp_lk = new List<CLinhKien>();
 
+
         public qlLinhKien()
         {
             InitializeComponent();
@@ -31,20 +32,50 @@ namespace wpfLKMT
         {
             HienThi();
         }
+        private string randomMaLK()
+        {
+            Random r = new Random();
+            CLoaiLK llk = cmbMaLoai.SelectedItem as CLoaiLK;
+            string malk = llk.MaLoai + r.Next(0000, 9999);
+            List<CLinhKien> dsLinhKien = CXuLiLinhKien.getDanhSachLinhKien();
+
+            foreach (CLinhKien a in dsLinhKien)
+            {
+                if(a.MaLK == malk)
+                {
+                    malk = llk.MaLoai + r.Next(0000, 9999);
+                }
+            }
+            return malk;
+        }
         private void HienThi()
         {
             List<CLinhKien> lst = CXuLiLinhKien.getDanhSachLinhKien();
             setNull();
             dgDanhSachLK.ItemsSource = lst;
             temp_lk = lst;
-            cmbMaLoai.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
-            cmbHSX.ItemsSource = CXuLyNhaSX.getDSNhaSanXuat();
+            List<CLoaiLK> dsLLKFilter = new List<CLoaiLK>();
+            List<CLoaiLK> dsLoaiLK = CXuLyLoaiLK.getDanhSachLoaiLK();
+            foreach(CLoaiLK llk in dsLoaiLK)
+            {
+                if (llk.status == true)
+                    dsLLKFilter.Add(llk);
+            }
+            cmbMaLoai.ItemsSource = dsLLKFilter;
+            List<CNhaSX> dsNhaSXFilter = new List<CNhaSX>();
+            List<CNhaSX> dsNhaSX = CXuLyNhaSX.getDSNhaSanXuat();
+            foreach (CNhaSX nsx in dsNhaSX)
+            {
+                if (nsx.status == true)
+                    dsNhaSXFilter.Add(nsx);
+            }
+            cmbHSX.ItemsSource = dsNhaSXFilter;
         }
         private void btnThem_Click(object sender, RoutedEventArgs e)
         {
             if (KiemTra() == false) return;
             CLinhKien lk = new CLinhKien();
-            lk.MaLK = txtMaLinhKien.Text;
+            lk.MaLK = randomMaLK();
             lk.TenLK = txtTenLinhKien.Text;
             lk.LoaiLK = cmbMaLoai.SelectedItem as CLoaiLK;
             lk.NhaSX = cmbHSX.SelectedItem as CNhaSX;
@@ -58,22 +89,17 @@ namespace wpfLKMT
             if (kq == true)
             {
                 MessageBox.Show("Thêm thành công");
+                HienThi();
             }
             else
             {
                 MessageBox.Show("Thêm thất bại");
             }
 
-            HienThi();
         }
         public bool KiemTra()
         {
-            if (txtMaLinhKien.Text == "")
-            {
-                MessageBox.Show("Vui lòng nhập mã linh kiện");
-                txtMaLinhKien.Focus();
-                return false;
-            }
+            
             if (txtTenLinhKien.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập tên linh kiện");

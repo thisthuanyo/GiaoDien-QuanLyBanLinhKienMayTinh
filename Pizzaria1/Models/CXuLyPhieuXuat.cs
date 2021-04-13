@@ -27,11 +27,11 @@ namespace wpfLKMT.Models
                 return null;
             }
         }
-        public static CPhieuXuat getPhieuXuat(string maPX)
+        public static CPhieuXuat getPhieuXuat(int maPX)
         {
             try
             {
-                string url = @"http://localhost:53137/api/hoadon/" + maPX;
+                string url = @"http://localhost:64275/api/phieuxuat/" + maPX;
                 var kq = hc.GetAsync(url);
                 kq.Wait();
                 if (kq.Result.IsSuccessStatusCode == false) return null;
@@ -64,8 +64,22 @@ namespace wpfLKMT.Models
         {
             try
             {
-                string url = @"http://localhost:53137/api/hoadon/";
+                string url = @"http://localhost:64275/api/phieuxuat/";
                 var kq = hc.PostAsJsonAsync(url, px);
+                kq.Wait();
+                return kq.Result.IsSuccessStatusCode;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public static bool huyPhieuXuat(CPhieuXuat px)
+        {
+            try
+            {
+                string url = @"http://localhost:64275/api/phieuxuat";
+                var kq = hc.PutAsJsonAsync(url, px);
                 kq.Wait();
                 return kq.Result.IsSuccessStatusCode;
             }
