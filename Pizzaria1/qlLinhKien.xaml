@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:wpfLKMT"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             Height="auto" Width="700">
+             Height="auto" Width="700" Loaded="UserControl_Loaded">
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
             <StackPanel Orientation="Vertical">
@@ -16,7 +16,7 @@
                         <TextBox Name="txtSearchLK" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã linh kiện" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                     </GroupBox>-->
 
-                    <GroupBox Header="Thông tin linh kiện" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="528" Height="205" materialDesign:ColorZoneAssist.Mode="Dark">
+                    <GroupBox Header="Thông tin linh kiện" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="572" Height="205" materialDesign:ColorZoneAssist.Mode="Dark">
                         <StackPanel Orientation="Horizontal">
                             <Grid Width="250">
                                 <Grid.ColumnDefinitions>
@@ -28,21 +28,13 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Mã linh kiện" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
                                 <TextBlock Text="Tên linh kiện" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-                                <TextBlock Text="Mã nhà cung cấp" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
-                                <TextBlock Text="Mã loại" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
-                                <TextBlock Text="Hãng sản xuất" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
-                                <TextBox Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"/>
-                                <TextBox Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
-                                <ComboBox IsEditable="true" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center"/>
-                                <ComboBox IsEditable="true" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center"/>
-                                <ComboBox IsEditable="true" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center"/>
-
-
+                                <TextBlock Text="Mã loại" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+                                <TextBox Name="txtMaLinhKien" Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"/>
+                                <TextBox Name="txtTenLinhKien" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
+                                <ComboBox Name="cmbMaLoai" DisplayMemberPath="MaLoai" SelectedValuePath="MaLoai" IsEditable="true" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center"/>
                             </Grid>
                             <Grid Width="250" Margin="20 0">
                                 <Grid.ColumnDefinitions>
@@ -53,49 +45,44 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
                                     <RowDefinition/>
-                                    <RowDefinition Height="3*"/>
+                                    <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Giá bán" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
+                                <TextBox Name="txtGiaBan"  Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"/>
+                                <TextBlock Text="Hãng sản xuất" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
                                 <TextBlock Text="Trạng thái" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-                                <TextBlock Text="Mô tả" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Margin="0 10"/>
-                                <TextBox Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"/>
                                 <CheckBox Content="Active?" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
+                                <ComboBox Name="cmbHSX"  DisplayMemberPath="MaNhaSX" SelectedValuePath="MaNhaSX" IsEditable="true" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center"/>
 
-                                <TextBox Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="80"/>
                             </Grid>
                         </StackPanel>
                     </GroupBox>
-                    <StackPanel HorizontalAlignment="Right" Width="152">
-                        <materialDesign:PackIcon Kind="Image" Height="150" Width="150" HorizontalAlignment="Center"/>
-                        <Button Content="Chọn hình" Width="100" Background="Gray" BorderThickness="0"/>
-                        <Button Content="Bỏ hình" Width="100" Margin="0 10 0 0" Background="Gray" BorderThickness="0"/>
-                        <Separator Margin="0 10 0 0"/>
-                    </StackPanel>
-                    <GroupBox Width="528" Header="Tìm kiếm" HorizontalAlignment="Left" VerticalAlignment="Top" materialDesign:ColorZoneAssist.Mode="Dark" Height="90">
-                        <TextBox materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã linh kiện" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                    <GroupBox Width="572" Header="Tìm kiếm" HorizontalAlignment="Left" VerticalAlignment="Top" materialDesign:ColorZoneAssist.Mode="Dark" Height="90">
+                        <TextBox KeyUp="txtTimKiemMaLK_KeyUp"  KeyDown="txtTimKiemMaLK_KeyDown" Name="txtTimKiemMaLK"  materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã linh kiện" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                     </GroupBox>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="152" Height="58">
                         <Separator/>
-                        <Button Content="Thêm" Background="Gray" BorderThickness="0" Margin="0,13" Width="62"/>
-                        <Button Content="Sửa" Margin="20,13" Width="65" Background="Gray" BorderThickness="0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="128" Height="200" Margin="0,90,0,10">
+                        <Button Content="Thêm" Name="btnThem"  Click="btnThem_Click" Background="Gray" BorderThickness="0" Margin="22,50,22,50"/>
+                        <Button Content="Sửa" Name="btnSua" Click="btnSua_Click" Margin="22,0,22,13" Background="Gray" BorderThickness="0"/>
                     </StackPanel>
                 </Grid>
                 <StackPanel Height="200" Margin="0 10">
-                    <DataGrid Name="dgDanhSachLK" AutoGenerateColumns="False" Height="200">
+                    <DataGrid Name="dgDanhSachLK" AutoGenerateColumns="False" Height="200" SelectionChanged="dgDanhSachLK_SelectionChanged" SelectedValuePath="MaLK" IsReadOnly="True">
                         <DataGrid.Effect>
                             <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
                         </DataGrid.Effect>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã linh kiện" Binding="{Binding mahang}" Width="105"/>
-                            <DataGridTextColumn Header="Tên linh kiện" Binding="{Binding tenhang}" Width="120"/>
-                            <DataGridTextColumn Header="Mã loại" Binding="{Binding mahang}" Width="80"/>
-                            <DataGridTextColumn Header="Mã nhà cung cấp" Binding="{Binding mahang}" Width="120"/>
-                            <DataGridTextColumn Header="Hãng sản xuất" Binding="{Binding mahang}" Width="105"/>
-                            <DataGridTextColumn Header="Giá bán" Binding="{Binding mahang}" Width="105"/>
+                            <DataGridTextColumn Header="Mã linh kiện" Binding="{Binding MaLK}" Width="105"/>
+                            <DataGridTextColumn Header="Tên linh kiện" Binding="{Binding TenLK}" Width="120"/>
+                            <DataGridTextColumn Header="Mã loại" Binding="{Binding MaLoai}" Width="80"/>
+                            <DataGridTextColumn Header="Hãng sản xuất" Binding="{Binding MaNSX}" Width="105"/>
+                            <DataGridTextColumn Header="Giá bán" Binding="{Binding GiaBan}" Width="105"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Content="Xóa" Name="btnXoa"/>
+                                        <Button Content="Xóa" Name="btnXoa" Click="btnXoa_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

@@ -99,6 +99,7 @@
     <Compile Include="Models\CNhanVien.cs" />
     <Compile Include="Models\CNhaSX.cs" />
     <Compile Include="Models\CPhieuXuat.cs" />
+    <Compile Include="Models\CXuLiLinhKien.cs" />
     <Compile Include="Models\CXuLyKhachHang.cs" />
     <Compile Include="Models\CXuLyLoaiLK.cs" />
     <Compile Include="Models\CXuLyNhanVien.cs" />

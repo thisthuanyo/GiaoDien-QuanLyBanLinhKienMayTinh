@@ -65,7 +65,6 @@ E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKien
 E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\bin\Debug\MaterialDesignThemes.Wpf.xml
 E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\bin\Debug\Newtonsoft.Json.xml
 E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\bin\Debug\System.Net.Http.Formatting.xml
-E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\obj\Debug\wpfLKMT.csprojAssemblyReference.cache
 E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\obj\Debug\LoginForm.g.cs
 E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\obj\Debug\MainWindow.g.cs
 E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\obj\Debug\NhanVienWindow.g.cs
@@ -109,3 +108,4 @@ E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKien
 E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\obj\Debug\wpfLKMT.csproj.CopyComplete
 E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\obj\Debug\wpfLKMT.exe
 E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\obj\Debug\wpfLKMT.pdb
+E:\Visual studio projects\Thực tập tốt nghiệp\GiaoDien-QuanLyBanLinhKienMayTinh\Pizzaria1\obj\Debug\wpfLKMT.csprojAssemblyReference.cache
