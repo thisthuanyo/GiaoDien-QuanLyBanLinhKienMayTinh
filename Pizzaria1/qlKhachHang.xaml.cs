@@ -116,7 +116,6 @@ namespace wpfLKMT
                 }
             }
         }
-
         private void BtnXoa_Click(object sender, RoutedEventArgs e)
         {
             CKhachHang nvSelect = dgDSKhachHang.SelectedItem as CKhachHang;
