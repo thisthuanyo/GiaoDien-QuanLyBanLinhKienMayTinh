@@ -33,14 +33,7 @@ namespace wpfLKMT
         }
         private void HienThi()
         {
-            List<CLinhKien> lst = new List<CLinhKien>();
-            foreach (var item in CXuLiLinhKien.getDanhSachLinhKien())
-            {
-                if (item.status == true)
-                {
-                    lst.Add(item);
-                }
-            }
+            List<CLinhKien> lst = CXuLiLinhKien.getDanhSachLinhKien();
             setNull();
             dgDanhSachLK.ItemsSource = lst;
             temp_lk = lst;
@@ -153,7 +146,6 @@ namespace wpfLKMT
             {
                 MessageBox.Show("Vui lòng chọn sản phẩm cần sửa");
                 return;
-
             }
             if (KiemTra() == false) return;
             CLinhKien lk = dgDanhSachLK.SelectedItem as CLinhKien;
@@ -162,6 +154,9 @@ namespace wpfLKMT
             lk.LoaiLK = cmbMaLoai.SelectedItem as CLoaiLK;
             lk.MaLoai = lk.LoaiLK.MaLoai;
             lk.MaNSX = lk.NhaSX.MaNhaSX;
+            if (checkActive.IsChecked == true)
+                lk.status = true;
+            else lk.status = false;
             lk.GiaBan = lk.GiaBan;
             bool kq = CXuLiLinhKien.suaLinhKien(lk);
             if (kq == true)

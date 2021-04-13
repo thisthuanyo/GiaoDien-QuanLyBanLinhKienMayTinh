@@ -52,7 +52,7 @@ namespace wpfLKMT
 
         private void txtTimKiemMaLK_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Enter)  
             {
 
                 string malk = txtTimKiemMaLK.Text.ToUpper();
@@ -87,7 +87,6 @@ namespace wpfLKMT
                 }
             }
         }
-
         private void dgDanhSachLK_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dgDanhSachLK.SelectedItem == null) return;
