@@ -51,7 +51,7 @@
                                 <TextBox Name="txtGiaBan"  Grid.Column="2" Grid.Row="0" VerticalAlignment="Center"/>
                                 <TextBlock Text="Hãng sản xuất" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
                                 <TextBlock Text="Trạng thái" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-                                <CheckBox Content="Active?" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
+                                <CheckBox Name="checkActive" Content="Active?" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
                                 <ComboBox Name="cmbHSX"  DisplayMemberPath="MaNhaSX" SelectedValuePath="MaNhaSX" IsEditable="true" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center"/>
 
                             </Grid>

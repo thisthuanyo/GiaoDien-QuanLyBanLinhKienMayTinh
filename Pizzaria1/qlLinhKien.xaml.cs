@@ -58,6 +58,9 @@ namespace wpfLKMT
             lk.MaLoai = lk.LoaiLK.MaLoai;
             lk.MaNSX = lk.NhaSX.MaNhaSX;
             lk.GiaBan = double.Parse(txtGiaBan.Text);
+            if (checkActive.IsChecked == true)
+                lk.status = true;
+            else lk.status = false;
             bool kq = CXuLiLinhKien.themLinhKien(lk);
             if (kq == true)
             {
@@ -138,6 +141,11 @@ namespace wpfLKMT
             txtGiaBan.Text = lk.GiaBan.ToString();
             cmbMaLoai.Text = lk.MaLoai.ToString();
             cmbHSX.Text = lk.MaNSX.ToString();
+            if(lk.status == true)
+            {
+                checkActive.IsChecked = true;
+            }
+            else checkActive.IsChecked = false;
         }
         private void btnSua_Click(object sender, RoutedEventArgs e)
         {
