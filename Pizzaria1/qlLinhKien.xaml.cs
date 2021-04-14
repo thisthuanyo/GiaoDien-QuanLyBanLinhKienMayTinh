@@ -99,7 +99,6 @@ namespace wpfLKMT
         }
         public bool KiemTra()
         {
-            
             if (txtTenLinhKien.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập tên linh kiện");

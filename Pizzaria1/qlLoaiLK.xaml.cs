@@ -52,51 +52,99 @@ namespace wpfLKMT
 
         private void BtnThemLLK_Click(object sender, RoutedEventArgs e)
         {
-            CLoaiLK llk = new CLoaiLK();
-            llk.MaLoai = txtMaLoai.Text;
-            llk.TenLoai = txtTenLoai.Text;
-            if (checkIsActive.IsChecked == true)
-                llk.status = true;
-            else llk.status = false;
-            bool kq = CXuLyLoaiLK.themLoaiLK(llk);
-            if (kq == true)
+            if (txtMaLoai.Text == "")
             {
-                MessageBox.Show("Thêm loại linh kiện thành công");
-                dgDanhSachLLK.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
+                MessageBox.Show("Vui lòng nhập mã loại linh kiện!");
+                txtMaLoai.Focus();
+            }
+            else if (txtTenLoai.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập tên loại linh kiện!");
+                txtTenLoai.Focus();
             }
             else
-                MessageBox.Show("Thêm loại linh kiện thất bại");
+            {
+                CLoaiLK llk = new CLoaiLK();
+                llk.MaLoai = txtMaLoai.Text;
+                llk.TenLoai = txtTenLoai.Text;
+                if (checkIsActive.IsChecked == true)
+                    llk.status = true;
+                else llk.status = false;
+                bool kq = CXuLyLoaiLK.themLoaiLK(llk);
+                if (kq == true)
+                {
+                    MessageBox.Show("Thêm loại linh kiện thành công");
+                    dgDanhSachLLK.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
+                }
+                else
+                    MessageBox.Show("Thêm loại linh kiện thất bại");
+            }
+               
         }
 
         private void BtnSuaLLK_Click(object sender, RoutedEventArgs e)
         {
-            CLoaiLK llk = new CLoaiLK();
-            llk.MaLoai = txtMaLoai.Text;
-            llk.TenLoai = txtTenLoai.Text;
-            if (checkIsActive.IsChecked == true)
-                llk.status = true;
-            else llk.status = false;
-            bool kq = CXuLyLoaiLK.suaLoaiLinhKien(llk);
-            if (kq == true)
+            CLoaiLK a = dgDanhSachLLK.SelectedItem as CLoaiLK;
+            if(a==null)
             {
-                MessageBox.Show("Sửa loại linh kiện thành công");
-                dgDanhSachLLK.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
+                MessageBox.Show("Vui lòng chọn loại linh kiện muốn sửa");
             }
             else
-                MessageBox.Show("Sửa loại linh kiện thất bại");
+            {
+                if (txtMaLoai.Text == "")
+                {
+                    MessageBox.Show("Mã loại linh kiện không được để trống!!");
+                    txtMaLoai.Focus();
+                }
+                else if (txtTenLoai.Text == "")
+                {
+                    MessageBox.Show("Tên loại linh kiện không được để trống!!");
+                    txtTenLoai.Focus();
+                }
+                else if (txtMaLoai.Text != a.MaLoai)
+                {
+                    MessageBox.Show("Không được sửa mã loại linh kiện");
+                    txtMaLoai.Text = a.MaLoai;
+                }
+                else
+                {
+                    CLoaiLK llk = new CLoaiLK();
+                    llk.MaLoai = txtMaLoai.Text;
+                    llk.TenLoai = txtTenLoai.Text;
+                    if (checkIsActive.IsChecked == true)
+                        llk.status = true;
+                    else llk.status = false;
+                    bool kq = CXuLyLoaiLK.suaLoaiLinhKien(llk);
+                    if (kq == true)
+                    {
+                        MessageBox.Show("Sửa loại linh kiện thành công");
+                        dgDanhSachLLK.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
+                    }
+                    else
+                        MessageBox.Show("Sửa loại linh kiện thất bại");
+                }
+            }
+           
         }
 
         private void BtnXoa_Click(object sender, RoutedEventArgs e)
         {
-            CLoaiLK llkSelected = dgDanhSachLLK.SelectedItem as CLoaiLK;
-            bool kq = CXuLyLoaiLK.xoaLoaiLinhKien(llkSelected.MaLoai);
-            if (kq == true)
+            if (dgDanhSachLLK.SelectedItem == null)
             {
-                MessageBox.Show("Xóa loại linh kiện thành công");
-                dgDanhSachLLK.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
+                MessageBox.Show("Vui lòng chọn loại linh kiện muốn xóa");
             }
             else
-                MessageBox.Show("Xóa loại linh kiện thất bại");
+            {
+                CLoaiLK llkSelected = dgDanhSachLLK.SelectedItem as CLoaiLK;
+                bool kq = CXuLyLoaiLK.xoaLoaiLinhKien(llkSelected.MaLoai);
+                if (kq == true)
+                {
+                    MessageBox.Show("Xóa loại linh kiện thành công");
+                    dgDanhSachLLK.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
+                }
+                else
+                    MessageBox.Show("Thông thể xóa loại linh kiện này!");
+            }
         }
 
         private void TextBox_KeyUp(object sender, KeyEventArgs e)

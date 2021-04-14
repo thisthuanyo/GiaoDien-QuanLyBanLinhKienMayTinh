@@ -43,9 +43,15 @@ namespace wpfLKMT
         }
         private void BtnThemKH_Click(object sender, RoutedEventArgs e)
         {
+            int num;
             if (txtNaKH.Text == "" || txtDiaChi.Text == "" || txtSDT.Text == "" || txtTenKH.Text == "" || txtNamSinh.Text == "")
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin cho khách hàng!", "Thông báo");
+            }
+            else if (int.TryParse(txtNamSinh.Text, out num) == false)
+            {
+                MessageBox.Show("Năm sinh phải nhập số");
+                txtNamSinh.Focus();
             }
             else
             {
@@ -72,32 +78,59 @@ namespace wpfLKMT
                     MessageBox.Show("Thêm khách hàng thất bại");
             }
         }
-
         private void BtnSuaKH_Click(object sender, RoutedEventArgs e)
         {
-            if (dgDSKhachHang.SelectedItem == null)
+            int num;
+            CKhachHang kha = dgDSKhachHang.SelectedItem as CKhachHang;
+            if (kha == null)
             {
                 MessageBox.Show("Vui lòng chọn khách hàng cần sửa!!", "Thông báo");
             }
             else
             {
                 CKhachHang kh = new CKhachHang();
-                CKhachHang khSelected = dgDSKhachHang.SelectedItem as CKhachHang;             
                 if (radNam.IsChecked == true)
                     kh.GioiTinh = true;
                 else kh.GioiTinh = false;
                 if (checkTrangThai.IsChecked == true)
                     kh.status = true;
                 else kh.status = false;
-                kh.MaKH = khSelected.MaKH;
-                if (txtTenKH.Text == "")
+                kh.MaKH = txtNaKH.Text;
+                if (txtNaKH.Text == "")
+                {
+                    MessageBox.Show("Mã khách hàng không được để trống!!", "Thông báo");
+                    txtNaKH.Focus();
+                }
+                else if (txtTenKH.Text == "")
+                {
                     MessageBox.Show("Tên khách hàng không được để trống!!", "Thông báo");
+                    txtTenKH.Focus();
+                }
                 else if (txtSDT.Text == "")
+                {
                     MessageBox.Show("Số điện thoại khách hàng không được để trống!!", "Thông báo");
+                    txtSDT.Focus();
+                }
                 else if (txtDiaChi.Text == "")
+                {
                     MessageBox.Show("Địa chỉ khách hàng không được để trống!!", "Thông báo");
+                    txtDiaChi.Focus();
+                }
                 else if (txtNamSinh.Text == "")
+                {
                     MessageBox.Show("Năm sinh khách hàng không được để trống!!", "Thông báo");
+                    txtNamSinh.Focus();
+                }
+                else if (int.TryParse(txtNamSinh.Text, out num) == false)
+                {
+                    MessageBox.Show("Năm sinh phải nhập số");
+                    txtNamSinh.Focus();
+                }
+                else if(txtNaKH.Text != kha.MaKH)
+                {
+                    MessageBox.Show("Không được sửa mã khách hàng");
+                    txtNaKH.Text = kha.MaKH;
+                }
                 else
                 {
                     kh.TenKh = txtTenKH.Text;

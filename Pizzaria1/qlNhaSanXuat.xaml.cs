@@ -40,33 +40,67 @@ namespace wpfLKMT
         }
         private void BtnThemNSX_Click(object sender, RoutedEventArgs e)
         {
-            CNhaSX nsx = new CNhaSX();
-            nsx.MaNhaSX = txtMaNSX.Text;
-            nsx.TenNhaSX = txtTenNSX.Text;
-            if (checkActive.IsChecked == true)
-                nsx.status = true;
-            else nsx.status = false;
-            bool kq = CXuLyNhaSX.themNhaSanXuat(nsx);
-            if(kq == true)
+            CNhaSX a = dgNhaSanXuat.SelectedItem as CNhaSX;
+            if(a==null)
             {
-                MessageBox.Show("Thêm nhà sản xuất thành công");
-                dgNhaSanXuat.ItemsSource = CXuLyNhaSX.getDSNhaSanXuat();
+                MessageBox.Show("Vui lòng chọn nhà sản xuất muốn sửa");
             }
-            else
-            MessageBox.Show("Thêm nhà sản xuất thất bại");
+            else {
+
+                if (txtMaNSX.Text == "")
+                {
+                    MessageBox.Show("Vui lòng nhập mã nhà sản xuất!");
+                    txtMaNSX.Focus();
+                }
+                else if (txtTenNSX.Text == "")
+                {
+                    MessageBox.Show("Vui lòng nhập tên nhà sản xuất!");
+                    txtTenNSX.Focus();
+                }
+                else if (txtMaNSX.Text != a.MaNhaSX)
+                {
+                    MessageBox.Show("Không được sửa mã nhà sản xuất");
+                    txtMaNSX.Text = a.MaNhaSX;
+                }
+                else
+                {
+                    CNhaSX nsx = new CNhaSX();
+                    nsx.MaNhaSX = txtMaNSX.Text;
+                    nsx.TenNhaSX = txtTenNSX.Text;
+                    if (checkActive.IsChecked == true)
+                        nsx.status = true;
+                    else nsx.status = false;
+                    bool kq = CXuLyNhaSX.themNhaSanXuat(nsx);
+                    if (kq == true)
+                    {
+                        MessageBox.Show("Thêm nhà sản xuất thành công");
+                        dgNhaSanXuat.ItemsSource = CXuLyNhaSX.getDSNhaSanXuat();
+                    }
+                    else
+                        MessageBox.Show("Thêm nhà sản xuất thất bại");
+                }
+            }
+            
         }
 
         private void BtnXoa_Click(object sender, RoutedEventArgs e)
         {
-            CNhaSX nsxSelect = dgNhaSanXuat.SelectedItem as CNhaSX;
-            bool kq = CXuLyNhaSX.xoaNhaSanXuat(nsxSelect.MaNhaSX);
-            if (kq == true)
+            if(dgNhaSanXuat.SelectedItem == null)
             {
-                MessageBox.Show("Xóa nhà sản xuất thành công");
-                dgNhaSanXuat.ItemsSource = CXuLyNhaSX.getDSNhaSanXuat();
+                MessageBox.Show("Vui lòng chọn nhà sản xuất muốn xóa!!");
             }
             else
-                MessageBox.Show("Xóa nhà sản xuất thất bại");
+            {
+                CNhaSX nsxSelect = dgNhaSanXuat.SelectedItem as CNhaSX;
+                bool kq = CXuLyNhaSX.xoaNhaSanXuat(nsxSelect.MaNhaSX);
+                if (kq == true)
+                {
+                    MessageBox.Show("Xóa nhà sản xuất thành công");
+                    dgNhaSanXuat.ItemsSource = CXuLyNhaSX.getDSNhaSanXuat();
+                }
+                else
+                    MessageBox.Show("Không thể xóa nhà sản xuất này!");
+            }
         }
         private void DgNhaSanXuat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -97,20 +131,32 @@ namespace wpfLKMT
 
         private void BtnSuaNSX_Click(object sender, RoutedEventArgs e)
         {
-            CNhaSX nsx = new CNhaSX();
-            nsx.MaNhaSX = txtMaNSX.Text;
-            nsx.TenNhaSX = txtTenNSX.Text;
-            if (checkActive.IsChecked == true)
-                nsx.status = true;
-            else nsx.status = false;
-            bool kq = CXuLyNhaSX.suaNhaSanXuat(nsx);
-            if (kq == true)
+           if(txtMaNSX.Text == "")
             {
-                MessageBox.Show("Sửa nhà sản xuất thành công");
-                dgNhaSanXuat.ItemsSource = CXuLyNhaSX.getDSNhaSanXuat();
+                MessageBox.Show("Mã nhà sản xuất không được để trống!!");
+                txtMaNSX.Focus();
             }
-            else
-                MessageBox.Show("Sửa nhà sản xuất thất bại");
+           else if(txtTenNSX.Text == "")
+            {
+                MessageBox.Show("Tên nhà sản xuất không được để trống!!");
+                txtMaNSX.Focus();
+            } else
+            {
+                CNhaSX nsx = new CNhaSX();
+                nsx.MaNhaSX = txtMaNSX.Text;
+                nsx.TenNhaSX = txtTenNSX.Text;
+                if (checkActive.IsChecked == true)
+                    nsx.status = true;
+                else nsx.status = false;
+                bool kq = CXuLyNhaSX.suaNhaSanXuat(nsx);
+                if (kq == true)
+                {
+                    MessageBox.Show("Sửa nhà sản xuất thành công");
+                    dgNhaSanXuat.ItemsSource = CXuLyNhaSX.getDSNhaSanXuat();
+                }
+                else
+                    MessageBox.Show("Sửa nhà sản xuất thất bại");
+            }
         }
     }
 }
