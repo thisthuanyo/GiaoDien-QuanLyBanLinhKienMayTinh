@@ -11,25 +11,7 @@
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
             <StackPanel Orientation="Vertical">
-                <StackPanel Height="264">
-                    <GroupBox Header="Chi tiết hóa đơn" materialDesign:ColorZoneAssist.Mode="Dark" Height="255" Margin="0,0,10,0">
-                        <StackPanel Margin="0,0,0,-7">
-                            <DataGrid Name="dgChitiet" AutoGenerateColumns="False" Height="206">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Mã hóa đơn"/>
-                                    <DataGridTextColumn Header="Mã linh kiện" />
-                                    <DataGridTextColumn Header="Tên linh kiện" />
-                                    <DataGridTextColumn Header="Số lượng"/>
-                                    <DataGridTextColumn Header="Số lượng"/>
-                                    <DataGridTextColumn Header="Đơn giá"/>
-                                    <DataGridTemplateColumn>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </StackPanel>
-                    </GroupBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 5 0 0" Height="326">
+                <StackPanel Orientation="Horizontal" Height="326">
                     <StackPanel>
                         <GroupBox Header="Thông tin hóa đơn" materialDesign:ColorZoneAssist.Mode="Dark" Width="246" Height="310">
                             <Grid>
@@ -46,7 +28,6 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
-                                    <RowDefinition/>
 
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Số hóa đơn" VerticalAlignment="Center"/>
@@ -54,20 +35,17 @@
                                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Mã nhân viên" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Mã khách hàng" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="0" Grid.Row="4" Text="Tổng tiền" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="0" Grid.Row="4" Text="Tổng tiền" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="0" Grid.Row="5" Text="Mã phiếu xuất" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Column="0" Grid.Row="6" Text="Ngày giao" VerticalAlignment="Center"/>
-                                <TextBlock Grid.Column="0" Grid.Row="7" Text="Trạng thái hóa đơn" VerticalAlignment="Center"/>
 
 
-                                <TextBox Grid.Column="2" Grid.Row="0" Name="txtSoPhieuXuat" VerticalAlignment="Center"  IsReadOnly="True"/>
+                                <TextBox Grid.Column="2" Grid.Row="0" Name="txtMaHD" VerticalAlignment="Center"  IsReadOnly="True"/>
                                 <DatePicker Grid.Column="2" Grid.Row="1" Name="dpNgayLapHD" VerticalAlignment="Center"/>
                                 <TextBox Grid.Column="2" Grid.Row="2" Name="txtMaNVXuat" VerticalAlignment="Center"  IsReadOnly="True"/>
                                 <TextBox Grid.Column="2" Grid.Row="3" Name="txtMaKH" VerticalAlignment="Center"  IsReadOnly="True"/>
                                 <TextBox Grid.Column="2" Grid.Row="4" IsReadOnly="True" Name="txtTongTien" VerticalAlignment="Center"/>
                                 <TextBox Grid.Column="2" Grid.Row="5" IsReadOnly="True" Name="txtMaPX" VerticalAlignment="Center"/>
                                 <DatePicker Grid.Column="2" Grid.Row="6" Name="dpNgayGiao" VerticalAlignment="Center"/>
-                                <CheckBox Grid.Column="2" Grid.Row="7" Name="checkTrangThai" Content="Bị hủy?" VerticalAlignment="Center"/>
                             </Grid>
                         </GroupBox>
                     </StackPanel>
@@ -84,16 +62,33 @@
                                     <TranslateTransform X="0.494"/>
                                 </TransformGroup>
                             </GroupBox.RenderTransform>
-                            <DataGrid x:Name="dgHoadon" AutoGenerateColumns="False" Margin="0,-6,0,-1" Width="430">
+                            <DataGrid x:Name="dgDSHoadon" AutoGenerateColumns="False" Margin="0,-6,0,-1" Width="430" SelectionChanged="DgDSHoadon_SelectionChanged" IsReadOnly="True" >
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Mã hóa đơn"/>
-                                    <DataGridTextColumn Header="Ngày lập"/>
-                                    <DataGridTextColumn Header="Mã khách hàng"/>
+                                    <DataGridTextColumn Header="Mã hóa đơn" Binding="{Binding MaHD}"/>
+                                    <DataGridTextColumn Header="Ngày lập" Binding="{Binding NgayLapHD, StringFormat={}{0:dd/MM/yyyy}}"/>
+                                    <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MaKH}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </GroupBox>
                     </StackPanel>
                 </StackPanel>
+                <StackPanel Height="264">
+                    <GroupBox Header="Chi tiết hóa đơn" materialDesign:ColorZoneAssist.Mode="Dark" Height="255">
+                        <StackPanel Margin="0,0,0,-7">
+                            <DataGrid Name="dgChitiet" AutoGenerateColumns="False" Height="206" IsReadOnly="True">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Mã linh kiện" Binding="{Binding MaLK}"/>
+                                    <DataGridTextColumn Header="Tên linh kiện" Binding="{Binding TenLK}"/>
+                                    <DataGridTextColumn Header="Loại linh kiện" Binding="{Binding MaLoai}"/>
+                                    <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia, StringFormat={}{0:C}, ConverterCulture=vi-VN}"/>
+                                    <DataGridTextColumn Header="Số lượng" Binding="{Binding SoLuong}"/>
+                                    <DataGridTextColumn Header="Thành tiền" Binding="{Binding thanhtien, StringFormat={}{0:C}, ConverterCulture=vi-VN}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+
             </StackPanel>
         </materialDesign:TransitioningContent>
     </Grid>

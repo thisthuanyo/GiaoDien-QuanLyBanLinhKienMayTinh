@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -155,6 +156,7 @@ namespace wpfLKMT
                 px.MaNV = txtMaNV.Text;
                 px.TongTien = double.Parse(txtThanhtien.Text);
                 px.status = true;
+                px.HoaDons = null;
                 px.ChiTietPhieuXuats = pxTemp.ChiTietPhieuXuats.Select(x => new CChiTietPhieuXuat
                 {
                     MaPX = px.MaPX,
@@ -180,7 +182,12 @@ namespace wpfLKMT
             if (Result == MessageBoxResult.Yes)
             {
                 CPhieuXuat px = dgDSPhieuXuat.SelectedItem as CPhieuXuat;
-                if(px.status == false)
+                CHoaDon hd = CXuLyHoaDon.getHoaDonByMaPX(px.MaPX);
+                if(hd != null)
+                {
+                    MessageBox.Show("Không thể hủy phiếu xuất này vì phiếu xuất này đã xuất hóa đơn!!", "Thông báo");
+                }
+                else if (px.status == false)
                 {
                     MessageBox.Show("Phiếu xuất này đã bị hủy!!", "Thông báo");
                 }
@@ -199,7 +206,7 @@ namespace wpfLKMT
         private void DgDSPhieuXuat_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CPhieuXuat a = dgDSPhieuXuat.SelectedItem as CPhieuXuat;
-            if(a!=null)
+            if (a != null)
             {
                 CPhieuXuat pxa = CXuLyPhieuXuat.getPhieuXuat(a.MaPX);
                 txtSoPX.Text = a.MaPX.ToString();
@@ -207,15 +214,12 @@ namespace wpfLKMT
                 cboMaKH.Text = a.MaKH;
                 dpNgayXuat.SelectedDate = a.NgayXuat;
                 dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxa);
-                txtThanhtien.Text = a.TongTien.ToString();
+                double tongtien = (double)a.TongTien;
+                txtThanhtien.Text = String.Format(new CultureInfo("vi-VN"), "{0:C}", tongtien);
+                btnLapHD.IsEnabled = true;
             }
+            else btnLapHD.IsEnabled = false;
         }
-
-        private void DgChitiet_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             List<CPhieuXuat> dsPhieuXuat = CXuLyPhieuXuat.getDSPhieuXuat();
@@ -231,6 +235,40 @@ namespace wpfLKMT
             dgDSPhieuXuat.ItemsSource = filter.ToList();
             if (txtSearch.Text == null)
                 dgDSPhieuXuat.ItemsSource = CXuLyNhanVien.getDanhSachNhanVien();
+        }
+
+        private void BtnLapHD_Click(object sender, RoutedEventArgs e)
+        {
+            CPhieuXuat pxSelected = dgDSPhieuXuat.SelectedItem as CPhieuXuat;
+            if(pxSelected.status == false)
+            {
+                MessageBox.Show("Phiếu xuất này đã bị hủy, không thể tạo hóa đơn cho phiếu xuất này!!", "Thông báo");
+            }
+            else if (pxSelected != null)
+            {
+                CHoaDon hd = new CHoaDon()
+                {
+                    MaKH = pxSelected.MaKH,
+                    MaNV = pxSelected.MaNV,
+                    NgayGiao = pxSelected.NgayXuat,
+                    NgayLapHD = DateTime.Now,
+                    status = pxSelected.status,
+                    TongTien = pxSelected.TongTien,
+                    MaPX = pxSelected.MaPX,
+                };
+                bool kq = CXuLyHoaDon.themHoaDon(hd);
+                if (kq == false) MessageBox.Show("Không lập được hóa đơn!!");
+                else
+                {
+                    MessageBox.Show("Lập hóa đơn thành công!!");
+                }
+            }
+
+        }
+
+        private void DgChitiet_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

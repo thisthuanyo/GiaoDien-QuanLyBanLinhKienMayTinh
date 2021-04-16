@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfLKMT.Models;
 
 namespace wpfLKMT
 {
@@ -23,6 +25,29 @@ namespace wpfLKMT
         public qlHoaDon()
         {
             InitializeComponent();
+            hienthi();
+        }
+        private void hienthi()
+        {
+            List<CHoaDon> dshd = CXuLyHoaDon.getDSHoaDon();
+            dgDSHoadon.ItemsSource = dshd;
+        }
+
+        private void DgDSHoadon_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CHoaDon hd = dgDSHoadon.SelectedItem as CHoaDon;
+            if(hd != null)
+            {
+                txtMaKH.Text = hd.MaKH;
+                txtMaNVXuat.Text = hd.MaNV;
+                txtMaPX.Text = hd.MaPX.ToString();
+                txtMaHD.Text = hd.MaHD.ToString();
+                dpNgayGiao.SelectedDate = hd.NgayGiao;
+                dpNgayLapHD.SelectedDate = hd.NgayLapHD;
+                double tongtien = (double)hd.TongTien;
+                txtTongTien.Text = String.Format(new CultureInfo("vi-VN"), "{0:C}", tongtien);
+                dgChitiet.ItemsSource = CXuLyHoaDon.getDSChiTietHoaDon(hd);
+            }
         }
     }
 }
