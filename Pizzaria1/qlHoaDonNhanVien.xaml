@@ -50,7 +50,7 @@
                             <TextBox materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã phiếu xuất" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
                         </GroupBox>
                         <GroupBox Header="Danh sách phiếu xuất" materialDesign:ColorZoneAssist.Mode="Dark" Margin="0,5" Height="200">
-                            <DataGrid x:Name="dgHoadon" AutoGenerateColumns="False" Margin="0,-6,0,-7" Width="430">
+                            <DataGrid x:Name="dgDSPhieuXuat" AutoGenerateColumns="False" Margin="0,-6,0,-7" Width="430">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Mã phiếu xuất"/>
                                     <DataGridTextColumn Header="Mã khách hàng"/>

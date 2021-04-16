@@ -48,7 +48,7 @@
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Mã phiếu xuất" Binding="{Binding MaPX}"/>
                                     <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MaKH}"/>
-                                    <DataGridTextColumn Header="Ngày xuất"  Binding="{Binding NgayXuat}" Width="100"/>
+                                    <DataGridTextColumn Header="Ngày xuất"  Binding="{Binding NgayXuat, StringFormat={}{0:dd/MM/yyyy}}" Width="100"/>
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -71,9 +71,9 @@
                                     <DataGridTextColumn Header="Mã linh kiện" Binding="{Binding MaLK}"/>
                                     <DataGridTextColumn Header="Tên linh kiện" Binding="{Binding TenLK}"/>
                                     <DataGridTextColumn Header="Loại linh kiện" Binding="{Binding MaLoai}"/>
-                                    <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia}"/>
+                                    <DataGridTextColumn Header="Đơn giá" Binding="{Binding DonGia, StringFormat={}{0:C}, ConverterCulture=vi-VN}"/>
                                     <DataGridTextColumn Header="Số lượng" Binding="{Binding SoLuong}"/>
-                                    <DataGridTextColumn Header="Thành tiền" Binding="{Binding thanhtien}"/>
+                                    <DataGridTextColumn Header="Thành tiền" Binding="{Binding thanhtien, StringFormat={}{0:C}, ConverterCulture=vi-VN}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                             <Grid>

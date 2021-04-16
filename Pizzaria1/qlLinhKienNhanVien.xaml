@@ -74,7 +74,7 @@
                             <DataGridTextColumn Header="Tên linh kiện" Binding="{Binding TenLK}" Width="120"/>
                             <DataGridTextColumn Header="Mã loại" Binding="{Binding MaLoai}" Width="80"/>
                             <DataGridTextColumn Header="Hãng sản xuất" Binding="{Binding MaNSX}" Width="105"/>
-                            <DataGridTextColumn Header="Giá bán" Binding="{Binding GiaBan}" Width="105"/>
+                            <DataGridTextColumn Header="Giá bán" Binding="{Binding GiaBan, StringFormat={}{0:C}, ConverterCulture=vi-VN}" Width="105"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

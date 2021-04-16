@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -84,7 +85,8 @@ namespace wpfLKMT
                 txtMaKH.Text = a.MaKH;
                 dpNgayXuat.SelectedDate = a.NgayXuat;
                 dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxa);
-                txtThanhtien.Text = a.TongTien.ToString();
+                double tongtien = (double)a.TongTien;
+                txtThanhtien.Text = String.Format(new CultureInfo("vi-VN"), "{0:C}", tongtien);
             }
         }
     }
