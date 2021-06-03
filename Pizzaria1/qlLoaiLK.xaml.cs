@@ -75,6 +75,7 @@ namespace wpfLKMT
                 {
                     MessageBox.Show("Thêm loại linh kiện thành công");
                     dgDanhSachLLK.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
+                    refresh();
                 }
                 else
                     MessageBox.Show("Thêm loại linh kiện thất bại");
@@ -118,6 +119,7 @@ namespace wpfLKMT
                     if (kq == true)
                     {
                         MessageBox.Show("Sửa loại linh kiện thành công");
+                        refresh();
                         dgDanhSachLLK.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
                     }
                     else
@@ -140,6 +142,7 @@ namespace wpfLKMT
                 if (kq == true)
                 {
                     MessageBox.Show("Xóa loại linh kiện thành công");
+                    refresh();
                     dgDanhSachLLK.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
                 }
                 else
@@ -147,19 +150,32 @@ namespace wpfLKMT
             }
         }
 
-        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             List<CLoaiLK> dsLoaiLK = CXuLyLoaiLK.getDanhSachLoaiLK();
             List<CLoaiLK> filter = new List<CLoaiLK>();
             foreach (CLoaiLK llk in dsLoaiLK)
             {
-                llk.MaLoai.ToUpper();
-                if (llk.MaLoai.Contains(txtSearch.Text.ToUpper()))
+                if (llk.MaLoai.ToUpper().Contains(txtSearch.Text.ToUpper()))
                 {
                     filter.Add(llk);
                 }
             }
             dgDanhSachLLK.ItemsSource = filter.ToList();
+            if (txtSearch.Text == null)
+                dgDanhSachLLK.ItemsSource = CXuLyLoaiLK.getDanhSachLoaiLK();
+        }
+        private void refresh()
+        {
+            txtMaLoai.Text = null;
+            txtTenLoai.Text = null;
+            txtSearch.Text = null;
+            checkIsActive.IsChecked = false;
+        }
+        private void BtnLamMoi_Click(object sender, RoutedEventArgs e)
+        {
+            refresh();
+            dgDanhSachLLK.SelectedItem = null;
         }
     }
 }

@@ -28,25 +28,42 @@ namespace wpfLKMT
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Models.CNhanVien a = Models.CXuLyNhanVien.checkLogin(txtTaiKhoan.Text, txtMatKhau.Password);
-            if (a != null)
+            if (txtTaiKhoan.Text == "")
+                MessageBox.Show("Bạn chưa nhập username!", "Thông báo");
+            else if(txtMatKhau.Password == "")
             {
-                if(a.ChucVu.Equals("AD"))
+                MessageBox.Show("Bạn chưa nhập mật khẩu!", "Thông báo");
+            }
+            else
+            {
+                Models.CNhanVien a = Models.CXuLyNhanVien.checkLogin(txtTaiKhoan.Text, txtMatKhau.Password);
+                if (a != null)
                 {
-                    MainWindow f = new MainWindow(a);
-                    UserLogin nv = new UserLogin(a);
-                    this.Hide();
-                    f.Show();
+                    if (a.ChucVu.Equals("AD"))
+                    {
+                        MainWindow f = new MainWindow(a);
+                        UserLogin nv = new UserLogin(a);
+                        this.Hide();
+                        f.Show();
+                    }
+                    else if (a.ChucVu.Equals("NV"))
+                    {
+                        NhanVienWindow f = new NhanVienWindow(a);
+                        UserLogin nvLogin = new UserLogin(a);
+                        CNhanVien nv = UserLogin.getLoginUser();
+                        if(nv.status == false)
+                        {
+                            MessageBox.Show("Tài khoản này đang bị vô hiệu hóa, vui lòng liên hệ quản trị viên!!", "Thông báo");
+                        }
+                        else
+                        {
+                            this.Hide();
+                            f.Show();
+                        }
+                    }
                 }
-                else if(a.ChucVu.Equals("NV"))
-                {
-                    NhanVienWindow f = new NhanVienWindow(a);
-                    UserLogin nv = new UserLogin(a);
-                    this.Hide();
-                    f.Show();
-                }
-            }      
-            else MessageBox.Show("Sai thông tin đăng nhập ");
+                else MessageBox.Show("Sai thông tin đăng nhập ");
+            }
         }
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)

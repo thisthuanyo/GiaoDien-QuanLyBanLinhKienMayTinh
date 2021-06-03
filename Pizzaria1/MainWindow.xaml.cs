@@ -91,9 +91,13 @@ namespace wpfLKMT
 
         private void BtnDangXuat_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            LoginForm f = new LoginForm();
-            f.Show();
+            MessageBoxResult Result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?", "Xác nhận", MessageBoxButton.YesNo);
+            if (Result == MessageBoxResult.Yes)
+            {
+                this.Close();
+                LoginForm f = new LoginForm();
+                f.Show();
+            }
         }
     }
 }

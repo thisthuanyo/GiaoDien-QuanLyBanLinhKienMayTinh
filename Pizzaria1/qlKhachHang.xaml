@@ -49,6 +49,7 @@
                     <StackPanel Height="50" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Click="BtnThemKH_Click" Content="Thêm" Name="btnThemKH" Background="Gray" BorderThickness="0" Width="88" Margin="0,9"/>
                         <Button Click="BtnSuaKH_Click" Content="Sửa" x:Name="btnSuaKH" Background="Gray" BorderThickness="0" Width="88" Margin="30,9"/>
+                        <Button Click="BtnLamMoi_Click" Content="Làm mới" x:Name="btnLamMoi" Background="Gray" BorderThickness="0" Width="88" Margin="0,9"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Width="330" Margin="20 0 0 0">

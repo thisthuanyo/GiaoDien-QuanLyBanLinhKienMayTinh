@@ -10,7 +10,7 @@
     <StackPanel Orientation="Vertical">
         <GroupBox Header="Thông tin nhân viên"  materialDesign:ColorZoneAssist.Mode="Dark">
             <StackPanel Orientation="Vertical">
-                <Grid Height="268">
+                <Grid Height="120">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10*"/>
                         <ColumnDefinition Width="12*"/>
@@ -21,25 +21,22 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
 
                     </Grid.RowDefinitions>
                     <TextBlock Text="Mã nhân viên" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"/>
-                    <TextBlock Text="Tên nhân viên" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-                    <TextBlock Text="Địa chỉ" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
+                    <TextBlock Text="Địa chỉ" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
                     <TextBlock Text="Số điện thoại" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
                     <TextBox Name="txtMaNV" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" IsReadOnly="True"/>
-                    <TextBox Name="txtTenNV" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
-                    <TextBox Name="txtDiaChi" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                    <TextBox Name="txtDiaChi" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" TextWrapping="Wrap"/>
                     <TextBox Name="txtSDT" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center"/>
                     <TextBlock Text="Username" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
                     <TextBox Name="txtUserName" Grid.Column="4" Grid.Row="0" VerticalAlignment="Center"/>
                 </Grid>
                 <Separator/>
                 <StackPanel Width="300" HorizontalAlignment="Left" Margin="0 5">
-                    <CheckBox x:Name="checkResetPassword" Content="Reset password" />
-                    <PasswordBox Name="txtPassword" Margin="0 10" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=checkResetPassword}" materialDesign:HintAssist.Hint="Password" />
-                    <PasswordBox Name="txtConfirmPassWord" Margin="0 3" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=checkResetPassword}" materialDesign:HintAssist.Hint="Confirm Password" />
+                    <CheckBox x:Name="checkResetPassword" Content="Đổi mật khẩu" />
+                    <PasswordBox Name="txtPassword" Margin="0 10" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=checkResetPassword}" materialDesign:HintAssist.Hint="Password hiện tại" />
+                    <PasswordBox Name="txtConfirmPassWord" Margin="0 3" Style="{StaticResource MaterialDesignOutlinedPasswordBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=checkResetPassword}" materialDesign:HintAssist.Hint="Password mới" />
                 </StackPanel>
             </StackPanel>
         </GroupBox>

@@ -32,7 +32,6 @@ namespace wpfLKMT
             txtUserName.Text = nvLogin.UserName;
             txtSDT.Text = nvLogin.SoDT;
             txtDiaChi.Text = nvLogin.DiaChi;
-            txtTenNV.Text = nvLogin.TenNV;
             txtMaNV.Text = nvLogin.MaNV;
         }
         private bool checkExistUserName(string username)
@@ -48,7 +47,6 @@ namespace wpfLKMT
             CNhanVien nvLogin = UserLogin.getLoginUser();
             nvLogin.SoDT = txtSDT.Text;
             nvLogin.DiaChi = txtDiaChi.Text;
-            nvLogin.TenNV = txtTenNV.Text;
             bool flag1 = true;
             bool flag2 = true;
             if (checkExistUserName(txtUserName.Text) && txtUserName.Text != nvLogin.UserName)
@@ -62,15 +60,15 @@ namespace wpfLKMT
             }
             if (checkResetPassword.IsChecked == true)
             {
-                if (txtPassword.Password != txtConfirmPassWord.Password)
+                if (txtPassword.Password != nvLogin.Pass)
                 {
-                    MessageBox.Show("Mật khẩu không khớp!!", "Thông báo");
+                    MessageBox.Show("Mật khẩu hiện tại không đúng!!", "Thông báo");
                     flag2 = false;
                 }
                 else
                 {
                     flag2 = true;
-                    nvLogin.Pass = txtPassword.Password;
+                    nvLogin.Pass = txtConfirmPassWord.Password;
                 }
             }
             if (flag1 == true && flag2 == true)

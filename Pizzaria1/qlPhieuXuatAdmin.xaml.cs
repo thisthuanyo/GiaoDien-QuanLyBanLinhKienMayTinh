@@ -39,9 +39,14 @@ namespace wpfLKMT
             if (Result == MessageBoxResult.Yes)
             {
                 CPhieuXuat px = dgDSPhieuXuat.SelectedItem as CPhieuXuat;
-                if (px.status == false)
+                CHoaDon hd = CXuLyHoaDon.getHoaDonByMaPX(px.MaPX);
+                if (hd != null)
                 {
-                    MessageBox.Show("Phiếu xuất này đã bị hủy!!", "Thông báo");
+                    MessageBox.Show("Không thể hủy phiếu xuất này vì phiếu xuất này đã xuất hóa đơn!!", "Thông báo");
+                }
+                else if (px.status == false)
+                {
+                    MessageBox.Show("Phiếu xuất này đã bị hủy trước đó!! ", "Thông báo");
                 }
                 else
                 {
@@ -63,7 +68,7 @@ namespace wpfLKMT
             foreach (CPhieuXuat px in dsPhieuXuat)
             {
                 px.MaPX.ToString().ToUpper();
-                if (px.MaPX.ToString().Contains(txtSearch.Text.ToUpper()))
+                if (px.MaPX.ToString().ToUpper().Contains(txtSearch.Text.ToUpper()))
                 {
                     filter.Add(px);
                 }

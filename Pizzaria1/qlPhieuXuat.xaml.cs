@@ -36,9 +36,6 @@ namespace wpfLKMT
         {
             InitializeComponent();
             hienthi();
-            List<CLinhKien> ds = CXuLiLinhKien.getDanhSachLinhKien();
-            if (ds == null) MessageBox.Show("Lỗi kết nối Server!!");
-            else cmbMahang.ItemsSource = ds;
         }
         private void hienthi()
         {
@@ -48,6 +45,24 @@ namespace wpfLKMT
             cboMaKH.ItemsSource = dsKhachHang;
             CNhanVien nvLogin = UserLogin.getLoginUser();
             txtMaNV.Text = nvLogin.MaNV;
+
+            List<CLinhKien> ds = CXuLiLinhKien.getDanhSachLinhKien();
+            List<CLinhKien> dsFilter = new List<CLinhKien>();
+            if (ds == null) MessageBox.Show("Lỗi kết nối Server!!");
+            else
+            {
+                foreach(CLinhKien lk in ds)
+                {
+                    if(lk.status == true)
+                    {
+                        dsFilter.Add(lk);
+                    }
+                }
+                if(dsFilter!= null)
+                {
+                    cmbMahang.ItemsSource = dsFilter;
+                }
+            }
         }
         
         private void BtnChon_Click(object sender, RoutedEventArgs e)
@@ -81,7 +96,10 @@ namespace wpfLKMT
                             {
                                 pxTemp.ChiTietPhieuXuats.Remove(t);
                                 dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxTemp);
-                                txtThanhtien.Text = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp).ToString();
+                                double tongtien = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp);
+                                txtThanhtien.Text = String.Format(new CultureInfo("vi-VN"), "{0:C}", tongtien);
+
+
                                 break;
                             }
                             else if (s < 0)
@@ -93,7 +111,8 @@ namespace wpfLKMT
                             {
                                 t.SoLuong = s;
                                 dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxTemp);
-                                txtThanhtien.Text = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp).ToString();
+                                double tongtien = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp);
+                                txtThanhtien.Text = String.Format(new CultureInfo("vi-VN"), "{0:C}", tongtien);
                                 break;
                             }
                         }
@@ -110,7 +129,8 @@ namespace wpfLKMT
                             ct.DonGia = lk.GiaBan;
                             pxTemp.ChiTietPhieuXuats.Add(ct);
                             dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxTemp);
-                            txtThanhtien.Text = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp).ToString();
+                            double tongtien = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp);
+                            txtThanhtien.Text = String.Format(new CultureInfo("vi-VN"), "{0:C}", tongtien);
                         }
                     }
                 }
@@ -129,7 +149,8 @@ namespace wpfLKMT
                 }
             }
             dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxTemp);
-            txtThanhtien.Text = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp).ToString();
+            double tongtien = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp);
+            txtThanhtien.Text = String.Format(new CultureInfo("vi-VN"), "{0:C}", tongtien);
         }
 
         private void BtnTaoPX_Click(object sender, RoutedEventArgs e)
@@ -154,7 +175,7 @@ namespace wpfLKMT
                 px.NgayXuat = dpNgayXuat.SelectedDate;
                 px.MaKH = cboMaKH.Text;
                 px.MaNV = txtMaNV.Text;
-                px.TongTien = double.Parse(txtThanhtien.Text);
+                px.TongTien = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp);
                 px.status = true;
                 px.HoaDons = null;
                 px.ChiTietPhieuXuats = pxTemp.ChiTietPhieuXuats.Select(x => new CChiTietPhieuXuat
@@ -169,10 +190,13 @@ namespace wpfLKMT
                 else
                 {
                     MessageBox.Show("Thêm phiếu xuất thành công!!");
-                    hienthi();
+                    refresh();
+                    List<CPhieuXuat> dsPhieuXuat = CXuLyPhieuXuat.getDSPhieuXuat();
+                    dgDSPhieuXuat.ItemsSource = dsPhieuXuat;
                     pxTemp.ChiTietPhieuXuats.Clear();
                     dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxTemp);
-                    txtThanhtien.Text = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp).ToString();
+                    double tongtien = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp);
+                    txtThanhtien.Text = String.Format(new CultureInfo("vi-VN"), "{0:C}", tongtien);
                 }
             }
         }
@@ -189,7 +213,7 @@ namespace wpfLKMT
                 }
                 else if (px.status == false)
                 {
-                    MessageBox.Show("Phiếu xuất này đã bị hủy!!", "Thông báo");
+                    MessageBox.Show("Phiếu xuất này đã bị hủy trước đó!! ","Thông báo");
                 }
                 else
                 {
@@ -198,6 +222,10 @@ namespace wpfLKMT
                     if (kq == true)
                     {
                         MessageBox.Show("Hủy phiếu xuất thành công!!");
+                        refresh();
+                        dgChitiet.ItemsSource = CXuLyPhieuXuat.getDSChiTietPhieuXuat(pxTemp);
+                        double tongtien = CXuLyPhieuXuat.getThanhTienPhieuXuat(pxTemp);
+                        txtThanhtien.Text = String.Format(new CultureInfo("vi-VN"), "{0:C}", tongtien);
                     }
                     else MessageBox.Show("Hủy phiếu xuất thất bại!");
                 }
@@ -226,8 +254,7 @@ namespace wpfLKMT
             List<CPhieuXuat> filter = new List<CPhieuXuat>();
             foreach (CPhieuXuat px in dsPhieuXuat)
             {
-                px.MaPX.ToString().ToUpper();
-                if (px.MaPX.ToString().Contains(txtSearch.Text.ToUpper()))
+                if (px.MaPX.ToString().ToUpper().Contains(txtSearch.Text.ToUpper()))
                 {
                     filter.Add(px);
                 }
@@ -261,11 +288,21 @@ namespace wpfLKMT
                 else
                 {
                     MessageBox.Show("Lập hóa đơn thành công!!");
+                    btnLapHD.IsEnabled = false;
+                    refresh();
                 }
             }
 
         }
-
+        private void refresh()
+        {
+            txtSoluong.Text = null;
+            txtSoPX.Text = null;
+            txtThanhtien.Text = null;
+            dpNgayXuat.SelectedDate = null;
+            cmbMahang.SelectedItem = null;
+            cboMaKH.SelectedItem = null;
+        }
         private void DgChitiet_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 

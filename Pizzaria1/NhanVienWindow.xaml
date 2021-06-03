@@ -53,26 +53,20 @@
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Account" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
+                            <materialDesign:PackIcon Kind="UserGroup" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
                             <TextBlock Text="Thông tin khách hàng" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Receipt" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                            <TextBlock Text="Quản lý phiếu xuất" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="FormatListBulleted" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                            <TextBlock Text="Quản lý hóa đơn" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                            <TextBlock Text="Phiếu xuất - Hóa đơn" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Account" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                            <TextBlock Text="Quản lý thông tin" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                            <TextBlock Text="Cập nhật tài khoản" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>

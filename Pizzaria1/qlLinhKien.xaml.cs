@@ -147,6 +147,7 @@ namespace wpfLKMT
             else
             {
                 MessageBox.Show("Xóa thành công");
+                HienThi();
             }
             HienThi();
         }
@@ -167,25 +168,33 @@ namespace wpfLKMT
         }
         private void btnSua_Click(object sender, RoutedEventArgs e)
         {
-            if (dgDanhSachLK.SelectedItem == null)
+            CLinhKien lkSelected = dgDanhSachLK.SelectedItem as CLinhKien;
+            if (lkSelected == null)
             {
-                MessageBox.Show("Vui lòng chọn sản phẩm cần sửa");
+                MessageBox.Show("Vui lòng chọn linh kiện cần sửa");
                 return;
             }
             if (KiemTra() == false) return;
-            CLinhKien lk = dgDanhSachLK.SelectedItem as CLinhKien;
+            CLoaiLK llk = cmbMaLoai.SelectedItem as CLoaiLK;
+            CNhaSX nsx = cmbHSX.SelectedItem as CNhaSX;
+            CLinhKien lk = new CLinhKien();
             lk.TenLK = txtTenLinhKien.Text;
-            lk.NhaSX = cmbHSX.SelectedItem as CNhaSX;
-            lk.LoaiLK = cmbMaLoai.SelectedItem as CLoaiLK;
-            lk.MaLoai = lk.LoaiLK.MaLoai;
+            lk.MaLK = lkSelected.MaLK;
+            lk.NhaSX = nsx;
+            lk.LoaiLK = llk;
+            lk.MaLoai = llk.MaLoai;
             lk.MaNSX = lk.NhaSX.MaNhaSX;
+            lk.GiaBan = double.Parse(txtGiaBan.Text);
             if (checkActive.IsChecked == true)
                 lk.status = true;
             else lk.status = false;
             lk.GiaBan = lk.GiaBan;
             bool kq = CXuLiLinhKien.suaLinhKien(lk);
             if (kq == true)
+            {
                 MessageBox.Show("Sửa thành công !!!");
+                HienThi();
+            }
             else
                 MessageBox.Show("Sửa thất bại !!!");
 
@@ -197,42 +206,28 @@ namespace wpfLKMT
             txtMaLinhKien.Text = "";
             txtTenLinhKien.Text = "";
         }
-        private void txtTimKiemMaLK_KeyDown(object sender, KeyEventArgs e)
+
+        private void TxtTimKiemMaLK_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            List<CLinhKien> dsLinhKien = CXuLiLinhKien.getDanhSachLinhKien();
+            List<CLinhKien> filter = new List<CLinhKien>();
+            foreach (CLinhKien lk in dsLinhKien)
             {
-
-                string malk = txtTimKiemMaLK.Text.ToUpper();
-
-                List<CLinhKien> lk = new List<CLinhKien>();
-                foreach (var item in temp_lk)
+                lk.MaLK.ToUpper().ToString().ToUpper();
+                if (lk.MaLK.ToString().Contains(txtTimKiemMaLK.Text.ToUpper()))
                 {
-                    string ma = item.MaLK.ToUpper();
-                    if (ma == malk)
-                    {
-                        lk.Add(item);
-                    }
+                    filter.Add(lk);
                 }
-
-                if (lk.Count == 0)
-                {
-                    MessageBox.Show("Không tìm thấy ");
-                    return;
-                }
-
-                dgDanhSachLK.ItemsSource = lk;
-                return;
             }
+            dgDanhSachLK.ItemsSource = filter.ToList();
+            if (txtTimKiemMaLK.Text == null)
+                dgDanhSachLK.ItemsSource = CXuLiLinhKien.getDanhSachLinhKien();
         }
-        private void txtTimKiemMaLK_KeyUp(object sender, KeyEventArgs e)
+
+        private void BtnLamMoi_Click(object sender, RoutedEventArgs e)
         {
-            if (e.Key == Key.Back)
-            {
-                if (txtTimKiemMaLK.Text == "")
-                {
-                    HienThi();
-                }
-            }
+            HienThi();
+            dgDanhSachLK.SelectedItem = null;
         }
     }
 }

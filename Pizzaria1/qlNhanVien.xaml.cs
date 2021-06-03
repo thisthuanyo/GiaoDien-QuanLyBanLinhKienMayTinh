@@ -98,7 +98,7 @@ namespace wpfLKMT
                     refresh();
                 }
                 else
-                    MessageBox.Show("Xóa nhân viên thất bại");
+                    MessageBox.Show("Không thể xóa nhân viên này");
             }
             else
             {
@@ -161,9 +161,7 @@ namespace wpfLKMT
                         MessageBox.Show("Thêm nhân viên thất bại");
                 }
             }
-
         }
-
         private void BtnSuaNV_Click(object sender, RoutedEventArgs e)
         {
             int num;
@@ -173,84 +171,96 @@ namespace wpfLKMT
             }
             else
             {
-                CNhanVien nv = new CNhanVien();
                 CNhanVien nvSelected = dgDSNhanVien.SelectedItem as CNhanVien;
-                CChucVu cv = cboChucVu.SelectedItem as CChucVu;
-                nv.ChucVu1 = cv;
-                nv.ChucVu = cv.MaCV;
-                nv.TenNV = txtTenNV.Text;
-                nv.MaNV = nvSelected.MaNV;
-                if (radNam.IsChecked == true)
-                    nv.GioiTinh = true;
-                else nv.GioiTinh = false;
-                if (checkTrangThai.IsChecked == true)
-                    nv.status = true;
-                else nv.status = false;
-                nv.NamSinh = int.Parse(txtNamSinh.Text);
-                nv.Pass = txtPassword.Text;
-                nv.UserName = txtUserName.Text;
-                nv.DiaChi = txtDiaChi.Text;
-                nv.SoDT = txtSDT.Text;
-                if (txtMaNV.Text == "")
-                {
-                    MessageBox.Show("Mã nhân viên không được để trống!!", "Thông báo");
-                    txtMaNV.Focus();
-                }
-                else if (txtTenNV.Text == "")
-                {
-                    MessageBox.Show("Tên nhân viên không được để trống!!", "Thông báo");
-                    txtTenNV.Focus();
-                }
-                else if (txtDiaChi.Text == "")
-                {
-                    MessageBox.Show("Địa chỉ khách hàng không được để trống!!", "Thông báo");
-                    txtDiaChi.Focus();
-                }
-                else if (txtSDT.Text == "")
-                {
-                    MessageBox.Show("Số điện thoại khách hàng không được để trống!!", "Thông báo");
-                    txtSDT.Focus();
-                }
-                else if (cboChucVu.Text == "")
-                {
-                    MessageBox.Show("Vui lòng chọn chức vụ cho nhân viên!!", "Thông báo");
-                    cboChucVu.Focus();
-                }
-                else if (txtUserName.Text == "")
-                {
-                    MessageBox.Show("Tên username không được để trống!!", "Thông báo");
-                    txtUserName.Focus();
-                }
-                else if (passwordBox.Password == "")
-                {
-                    MessageBox.Show("Mật khẩu nhân viên không được để trống!!", "Thông báo");
-                    passwordBox.Focus();
-                }
-                else if (txtNamSinh.Text == "")
-                {
-                    MessageBox.Show("Năm sinh nhân viên không được để trống!!", "Thông báo");
-                    txtNamSinh.Focus();
-                }
-                else if (int.TryParse(txtNamSinh.Text, out num) == false)
-                {
-                    MessageBox.Show("Năm sinh phải nhập số");
-                    txtNamSinh.Focus();
-                }
-                else if (checkExistUserName(nv.UserName) && nvSelected.UserName != txtUserName.Text)
-                {
-                    MessageBox.Show("Tên username này đã tồn tại!!", "Thông báo");
-                }
+                CNhanVien nvLogin = UserLogin.getLoginUser();
+                if (nvSelected.ChucVu == nvLogin.ChucVu)
+                    MessageBox.Show("Bạn không có quyền sửa tài khoản có cùng chức vụ!!", "Thông báo");
                 else
                 {
-                    bool kq = CXuLyNhanVien.suaNhanVien(nv);
-                    if (kq == true)
+                    CNhanVien nv = new CNhanVien();
+                    CChucVu cv = cboChucVu.SelectedItem as CChucVu;
+                    nv.ChucVu1 = cv;
+                    nv.ChucVu = cv.MaCV;
+                    nv.TenNV = txtTenNV.Text;
+                    nv.MaNV = nvSelected.MaNV;
+                    if (radNam.IsChecked == true)
+                        nv.GioiTinh = true;
+                    else nv.GioiTinh = false;
+                    if (checkTrangThai.IsChecked == true)
+                        nv.status = true;
+                    else nv.status = false;
+                    nv.NamSinh = int.Parse(txtNamSinh.Text);
+                    nv.Pass = txtPassword.Text;
+                    nv.UserName = txtUserName.Text;
+                    nv.DiaChi = txtDiaChi.Text;
+                    nv.SoDT = txtSDT.Text;
+                    if (txtMaNV.Text == "")
                     {
-                        MessageBox.Show("Sửa Nhân viên thành công");
-                        refresh();
-                        dgDSNhanVien.ItemsSource = CXuLyNhanVien.getDanhSachNhanVien();
+                        MessageBox.Show("Mã nhân viên không được để trống!!", "Thông báo");
+                        txtMaNV.Focus();
+                    }
+                    else if (txtTenNV.Text == "")
+                    {
+                        MessageBox.Show("Tên nhân viên không được để trống!!", "Thông báo");
+                        txtTenNV.Focus();
+                    }
+                    else if (txtDiaChi.Text == "")
+                    {
+                        MessageBox.Show("Địa chỉ khách hàng không được để trống!!", "Thông báo");
+                        txtDiaChi.Focus();
+                    }
+                    else if (txtSDT.Text == "")
+                    {
+                        MessageBox.Show("Số điện thoại khách hàng không được để trống!!", "Thông báo");
+                        txtSDT.Focus();
+                    }
+                    else if (cboChucVu.Text == "")
+                    {
+                        MessageBox.Show("Vui lòng chọn chức vụ cho nhân viên!!", "Thông báo");
+                        cboChucVu.Focus();
+                    }
+                    else if (txtUserName.Text == "")
+                    {
+                        MessageBox.Show("Tên username không được để trống!!", "Thông báo");
+                        txtUserName.Focus();
+                    }
+                    else if (passwordBox.Password == "")
+                    {
+                        MessageBox.Show("Mật khẩu nhân viên không được để trống!!", "Thông báo");
+                        passwordBox.Focus();
+                    }
+                    else if (txtNamSinh.Text == "")
+                    {
+                        MessageBox.Show("Năm sinh nhân viên không được để trống!!", "Thông báo");
+                        txtNamSinh.Focus();
+                    }
+                    else if (int.TryParse(txtNamSinh.Text, out num) == false)
+                    {
+                        MessageBox.Show("Năm sinh phải nhập số");
+                        txtNamSinh.Focus();
+                    }
+                    else if (txtMaNV.Text != nvSelected.MaNV)
+                    {
+                        MessageBox.Show("Không được sửa mã nhân viên", "Thông báo");
+                        txtMaNV.Text = nvSelected.MaNV;
+                        return;
+                    }
+                    else if (checkExistUserName(nv.UserName) && nvSelected.UserName != txtUserName.Text)
+                    {
+                        MessageBox.Show("Tên username này đã tồn tại!!", "Thông báo");
                     }
                     else
-                        MessageBox.Show("Sửa nhân viên thất bại");
+                    {
+                        bool kq = CXuLyNhanVien.suaNhanVien(nv);
+                        if (kq == true)
+                        {
+                            MessageBox.Show("Sửa Nhân viên thành công");
+                            refresh();
+                            dgDSNhanVien.ItemsSource = CXuLyNhanVien.getDanhSachNhanVien();
+                        }
+                        else
+                            MessageBox.Show("Sửa nhân viên thất bại");
+                    }
                 }
             }
         }
@@ -293,8 +303,7 @@ namespace wpfLKMT
             List<CNhanVien> filter = new List<CNhanVien>();
             foreach (CNhanVien nv in dsNhanVien)
             {
-                nv.MaNV.ToUpper();
-                if (nv.MaNV.Contains(txtSearchNV.Text.ToUpper()))
+                if (nv.MaNV.ToUpper().Contains(txtSearchNV.Text.ToUpper()))
                 {
                     filter.Add(nv);
                 }
@@ -302,6 +311,11 @@ namespace wpfLKMT
             dgDSNhanVien.ItemsSource = filter.ToList();
             if (txtSearchNV.Text == null)
                 dgDSNhanVien.ItemsSource = CXuLyNhanVien.getDanhSachNhanVien();
+        }
+        private void BtnLamMoi_Click(object sender, RoutedEventArgs e)
+        {
+            refresh();
+            dgDSNhanVien.SelectedItem = null;
         }
     }
 }

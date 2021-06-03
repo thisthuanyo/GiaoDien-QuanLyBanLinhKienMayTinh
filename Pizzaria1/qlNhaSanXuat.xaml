@@ -12,10 +12,10 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical" Width="309">
                     <GroupBox Header="Tìm kiếm" Margin="0 0 0 10" materialDesign:ColorZoneAssist.Mode="Dark">
-                        <TextBox Name="txtSearchNSX" KeyUp="TxtSearchNSX_KeyUp" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã nhà sản xuất" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                        <TextBox Name="txtSearchNSX"  materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã nhà sản xuất" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" TextChanged="TxtSearchNSX_TextChanged"/>
                     </GroupBox>
-                    <GroupBox Header="Thông tin nhà sản xuất" materialDesign:ColorZoneAssist.Mode="Dark">
-                        <StackPanel Orientation="Vertical">
+                    <GroupBox Header="Thông tin nhà sản xuất" materialDesign:ColorZoneAssist.Mode="Dark" Height="303">
+                        <StackPanel Orientation="Vertical" Height="264">
                             <Grid Margin="0 30">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="56*"/>
@@ -42,13 +42,15 @@
 
                             </Grid>
                             <StackPanel Orientation="Horizontal" Margin="0 30" Width="250">
-                                <Button  Width="100" Height="30" Content="Thêm" Name="btnThemNSX" Background="Gray" BorderThickness="0" Click="BtnThemNSX_Click"/>
-                                <Button  Width="100" Height="30" Content="Sửa" Margin="50  0" Name="btnSuaNSX" Background="Gray" BorderThickness="0" Click="BtnSuaNSX_Click"/>
+                                <Button  Width="75" Height="30" Content="Thêm" Name="btnThemNSX" Background="Gray" BorderThickness="0" Click="BtnThemNSX_Click" />
+                                <Button  Width="75" Height="30" Margin="10" Content="Sửa" Name="btnSuaNSX"  Background="Gray" BorderThickness="0" Click="BtnSuaNSX_Click"/>
+                                <Button  Width="80" Height="30" Content= "Làm mới" FontSize="12" Name="btnLamMoi" Background="Gray" BorderThickness="0" Click="BtnLamMoi_Click"/>
                             </StackPanel>
+
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
-                <DataGrid Name="dgNhaSanXuat" AutoGenerateColumns="False" SelectedValuePath="MaNhaSX"  Margin="10 0" Width="381" IsReadOnly="True" SelectionChanged="DgNhaSanXuat_SelectionChanged"  >
+                <DataGrid Name="dgNhaSanXuat" AutoGenerateColumns="False" SelectedValuePath="MaNhaSX" Height="405"  Margin="10 0" Width="381" IsReadOnly="True" SelectionChanged="DgNhaSanXuat_SelectionChanged"  >
                     <DataGrid.Effect>
                         <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
                     </DataGrid.Effect>

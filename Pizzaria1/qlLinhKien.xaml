@@ -14,7 +14,7 @@
                     <!--<Image Name="imgHinhLK" Height="200" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"></Image>-->
                     <!--<GroupBox Header="Tìm kiếm" Margin="0 10 0 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="150" materialDesign:ColorZoneAssist.Mode="Dark">
                         <TextBox Name="txtSearchLK" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã linh kiện" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
-                    </GroupBox>-->
+                    </GroupBox>- ->
 
                     <GroupBox Header="Thông tin linh kiện" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="572" Height="205" materialDesign:ColorZoneAssist.Mode="Dark">
                         <StackPanel Orientation="Horizontal">
@@ -57,27 +57,28 @@
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Width="572" Header="Tìm kiếm" HorizontalAlignment="Left" VerticalAlignment="Top" materialDesign:ColorZoneAssist.Mode="Dark" Height="90">
-                        <TextBox KeyUp="txtTimKiemMaLK_KeyUp"  KeyDown="txtTimKiemMaLK_KeyDown" Name="txtTimKiemMaLK"  materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã linh kiện" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                        <TextBox  Name="txtTimKiemMaLK"  materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:HintAssist.Hint="Mã linh kiện" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" TextChanged="TxtTimKiemMaLK_TextChanged"/>
                     </GroupBox>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="152" Height="58">
                         <Separator/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="128" Height="200" Margin="0,90,0,10">
-                        <Button Content="Thêm" Name="btnThem"  Click="btnThem_Click" Background="Gray" BorderThickness="0" Margin="22,50,22,50"/>
-                        <Button Content="Sửa" Name="btnSua" Click="btnSua_Click" Margin="22,0,22,13" Background="Gray" BorderThickness="0"/>
+                        <Button Content="Thêm" Name="btnThem"  Click="btnThem_Click" Background="Gray" BorderThickness="0" Margin="22,70,17,13"/>
+                        <Button Content="Sửa" Name="btnSua" Click="btnSua_Click" Margin="22,0,17,13" Background="Gray" BorderThickness="0"/>
+                        <Button Content="Làm mới" Name="btnLamMoi" Click="BtnLamMoi_Click" Margin="22,0,17,13" Background="Gray" BorderThickness="0"/>
+
                     </StackPanel>
                 </Grid>
                 <StackPanel Height="200" Margin="0 10">
-                    <DataGrid Name="dgDanhSachLK" AutoGenerateColumns="False" Height="200" SelectionChanged="dgDanhSachLK_SelectionChanged" SelectedValuePath="MaLK" IsReadOnly="True">
+                    <DataGrid Name="dgDanhSachLK" AutoGenerateColumns="False" Height="200" SelectionChanged="dgDanhSachLK_SelectionChanged" SelectedValuePath="MaLK" IsReadOnly="True" Margin="0,0,127,0">
                         <DataGrid.Effect>
                             <DropShadowEffect BlurRadius="20" Color="#FFDEDEDE" ShadowDepth="1"/>
                         </DataGrid.Effect>
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Mã linh kiện" Binding="{Binding MaLK}" Width="105"/>
-                            <DataGridTextColumn Header="Tên linh kiện" Binding="{Binding TenLK}" Width="120"/>
+                            <DataGridTextColumn Header="Tên linh kiện" Binding="{Binding TenLK}" Width="130"/>
                             <DataGridTextColumn Header="Mã loại" Binding="{Binding MaLoai}" Width="80"/>
-                            <DataGridTextColumn Header="Hãng sản xuất" Binding="{Binding MaNSX}" Width="105"/>
-                            <DataGridTextColumn Header="Giá bán" Binding="{Binding GiaBan, StringFormat={}{0:C}, ConverterCulture=vi-VN}" Width="105"/>
+                            <DataGridTextColumn Header="Giá bán" Binding="{Binding GiaBan, StringFormat={}{0:C}, ConverterCulture=vi-VN}" Width="120"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

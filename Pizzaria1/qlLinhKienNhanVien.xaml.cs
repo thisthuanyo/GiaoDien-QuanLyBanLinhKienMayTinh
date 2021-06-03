@@ -49,44 +49,6 @@ namespace wpfLKMT
             txtMaLinhKien.Text = "";
             txtTenLinhKien.Text = "";
         }
-
-        private void txtTimKiemMaLK_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)  
-            {
-
-                string malk = txtTimKiemMaLK.Text.ToUpper();
-
-                List<CLinhKien> lk = new List<CLinhKien>();
-                foreach (var item in temp_lk)
-                {
-                    string ma = item.MaLK.ToUpper();
-                    if (ma == malk)
-                    {
-                        lk.Add(item);
-                    }
-                }
-
-                if (lk.Count == 0)
-                {
-                    MessageBox.Show("Không tìm thấy ");
-                    return;
-                }
-
-                dgDanhSachLK.ItemsSource = lk;
-                return;
-            }
-        }
-        private void txtTimKiemMaLK_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Back)
-            {
-                if (txtTimKiemMaLK.Text == "")
-                {
-                    HienThi();
-                }
-            }
-        }
         private void dgDanhSachLK_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dgDanhSachLK.SelectedItem == null) return;
@@ -101,6 +63,23 @@ namespace wpfLKMT
                 checkActive.IsChecked = true;
             }
             else checkActive.IsChecked = false;
+        }
+
+        private void TxtTimKiemMaLK_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<CLinhKien> dsLinhKien = CXuLiLinhKien.getDanhSachLinhKien();
+            List<CLinhKien> filter = new List<CLinhKien>();
+            foreach (CLinhKien lk in dsLinhKien)
+            {
+                lk.MaLK.ToUpper().ToString().ToUpper();
+                if (lk.MaLK.ToString().Contains(txtTimKiemMaLK.Text.ToUpper()))
+                {
+                    filter.Add(lk);
+                }
+            }
+            dgDanhSachLK.ItemsSource = filter.ToList();
+            if (txtTimKiemMaLK.Text == null)
+                dgDanhSachLK.ItemsSource = CXuLiLinhKien.getDanhSachLinhKien();
         }
     }
 }

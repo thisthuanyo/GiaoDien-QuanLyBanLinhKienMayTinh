@@ -61,10 +61,6 @@ namespace wpfLKMT
                     break;
                 case 3:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new qlHoaDonNhanVien());
-                    break;
-                case 4:
-                    GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new qlTaiKhoanNhanVien());
                     break;
                 default:
@@ -85,9 +81,13 @@ namespace wpfLKMT
 
         private void BtnDangXuat1_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            LoginForm f = new LoginForm();
-            f.Show();
+            MessageBoxResult Result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất không?", "Xác nhận", MessageBoxButton.YesNo);
+            if (Result == MessageBoxResult.Yes)
+            {
+                this.Close();
+                LoginForm f = new LoginForm();
+                f.Show();
+            }
         }
     }
 }

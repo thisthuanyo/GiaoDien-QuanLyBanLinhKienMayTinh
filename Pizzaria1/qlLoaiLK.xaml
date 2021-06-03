@@ -12,7 +12,7 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Vertical" Width="299">
                     <GroupBox Header="Tìm kiếm" Margin="0 0 0 10" materialDesign:ColorZoneAssist.Mode="Dark">
-                        <TextBox Name="txtSearch" materialDesign:TextFieldAssist.HasClearButton="True" KeyUp="TextBox_KeyUp" materialDesign:HintAssist.Hint="Mã linh kiện" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"/>
+                        <TextBox Name="txtSearch" materialDesign:TextFieldAssist.HasClearButton="True"  materialDesign:HintAssist.Hint="Mã linh kiện" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" TextChanged="TxtSearch_TextChanged"/>
                     </GroupBox>
                     <GroupBox Header="Thông tin loại linh kiện" materialDesign:ColorZoneAssist.Mode="Dark" Height="341">
                         <StackPanel Orientation="Vertical">
@@ -42,8 +42,9 @@
 
                             </Grid>
                             <StackPanel Orientation="Horizontal" Margin="0 30" Width="250">
-                                <Button  Width="100" Height="30" Content="Thêm" Name="btnThemLLK" Background="Gray" BorderThickness="0" Click="BtnThemLLK_Click" />
-                                <Button  Width="100" Height="30" Content="Sửa" Name="btnSuaLLK" Margin="50  0" Background="Gray" BorderThickness="0" Click="BtnSuaLLK_Click"/>
+                                <Button  Width="75" Height="30" Content="Thêm" Name="btnThemLLK" Background="Gray" BorderThickness="0" Click="BtnThemLLK_Click" />
+                                <Button  Width="75" Height="30" Margin="10" Content="Sửa" Name="btnSuaLLK"  Background="Gray" BorderThickness="0" Click="BtnSuaLLK_Click"/>
+                                <Button  Width="80" Height="30" Content= "Làm mới" FontSize="12" Name="btnLamMoi" Background="Gray" BorderThickness="0" Click="BtnLamMoi_Click"/>
                             </StackPanel>
                         </StackPanel>
                     </GroupBox>

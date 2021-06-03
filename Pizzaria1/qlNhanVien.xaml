@@ -37,7 +37,7 @@
                             <TextBox Name="txtTenNV" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
                             <TextBox Name="txtDiaChi" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" TextWrapping="Wrap"/>
                             <TextBox Name="txtSDT" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"/>
-                            <ComboBox DisplayMemberPath="TenCV" Name="cboChucVu" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center"/>
+                            <ComboBox DisplayMemberPath="TenCV" Name="cboChucVu" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" IsEditable="True"/>
 
                             <TextBlock Text="Username" Grid.Column="3" Grid.Row="0" VerticalAlignment="Center"/>
                             <TextBlock Text="Password" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center"/>
@@ -65,7 +65,8 @@
                     </GroupBox>
                     <StackPanel Height="50" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button Content="Thêm" Name="btnThemNV" Click="BtnThemNV_Click" Background="Gray" BorderThickness="0" Width="88" Margin="0,9"/>
-                        <Button Content="Sửa" Name="btnSuaNV" Click="BtnSuaNV_Click" Margin="30,9,0,9" Width="88" Background="Gray" BorderThickness="0"/>
+                        <Button Content="Sửa" Name="btnSuaNV" Click="BtnSuaNV_Click" Margin="15,9,0,9" Width="88" Background="Gray" BorderThickness="0"/>
+                        <Button Content="Làm mới" Name="btnLamMoi" Click="BtnLamMoi_Click" Margin="15,9,0,9" Width="88" Background="Gray" BorderThickness="0"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Width="320" Margin="10 0 0 0">

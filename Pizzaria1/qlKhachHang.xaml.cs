@@ -35,6 +35,7 @@ namespace wpfLKMT
             checkTrangThai.IsChecked = true;
             txtNaKH.Text = null;
             txtTenKH.Text = null;
+            txtSearch.Text = null;
         }
         private void hienthi()
         {
@@ -162,7 +163,7 @@ namespace wpfLKMT
                     refresh();
                 }
                 else
-                    MessageBox.Show("Xóa khách hàng thất bại");
+                    MessageBox.Show("Không thể xóa khách hàng này!!","Thông báo");
             }
             else
             {
@@ -176,8 +177,7 @@ namespace wpfLKMT
             List<CKhachHang> filter = new List<CKhachHang>();
             foreach (CKhachHang kh in dsKhachHang)
             {
-                kh.MaKH.ToUpper();
-                if (kh.MaKH.Contains(txtSearch.Text.ToUpper()))
+                if (kh.MaKH.ToUpper().Contains(txtSearch.Text.ToUpper()))
                 {
                     filter.Add(kh);
                 }
@@ -206,6 +206,10 @@ namespace wpfLKMT
                 }
                 else checkTrangThai.IsChecked = false;
             }
+        }
+        private void BtnLamMoi_Click(object sender, RoutedEventArgs e)
+        {
+            refresh();
         }
     }
 }

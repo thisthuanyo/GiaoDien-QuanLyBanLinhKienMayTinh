@@ -49,5 +49,21 @@ namespace wpfLKMT
                 dgChitiet.ItemsSource = CXuLyHoaDon.getDSChiTietHoaDon(hd);
             }
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<CHoaDon> dsHoaDon = CXuLyHoaDon.getDSHoaDon();
+            List<CHoaDon> filter = new List<CHoaDon>();
+            foreach (CHoaDon hd in dsHoaDon)
+            {
+                if (hd.MaHD.ToString().ToUpper().Contains(txtSearch.Text.ToUpper()))
+                {
+                    filter.Add(hd);
+                }
+            }
+            dgDSHoadon.ItemsSource = filter.ToList();
+            if (txtSearch.Text == null)
+                dgDSHoadon.ItemsSource = CXuLyHoaDon.getDSHoaDon();
+        }
     }
 }
